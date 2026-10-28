@@ -1,105 +1,57 @@
 ---
-title: "How to customize your SaaS site"
-description: "From clone to live site in 30 minutes. A practical walkthrough of the places you actually need to touch to make RicoFast your own."
+title: "如何定制与扩展你的独立站点：30分钟极速落地指南"
+description: "从配置参数、样式令牌到内容发布：高效掌握 Ace灯塔架构的核心拓展路径与工程实践。"
 publishDate: 2026-02-04
-read: 8
-tags: ["Guide", "Tutorial"]
+read: 7
+tags: ["开发指南", "实践教程", "工程化"]
 img: "/assets/article-cover.jpg"
-img_alt: "Customizing the RicoFast template"
+img_alt: "Ace灯塔站点定制与扩展指南"
 ---
 
-The fastest way to misuse a template is to start by rewriting every component. RicoFast is built so the first ninety percent of the work is editing **three places**: a config file, a CSS variables block, and your content directory.
+在接手一套现代 Web 工程时，盲目重写全局组件往往容易引入结构回归。Ace灯塔经过精心分层设计，使 90% 的日常定制工作集中在三个核心入口：**站点配置文件**、**设计令牌定义**以及**内容驱动目录**。
 
-This post walks through each.
+本文将按步骤介绍如何高效完成自主化定制。
 
-## 1. Site configuration - `src/config/site.js`
+## 1. 站点元信息配置 — `src/config/site.js`
 
-This is the single source of truth for your brand identity. Page titles, metadata, footer links, social links, and contact details should flow through this file.
+这是站点的唯一真实数据源。页面标题、全局 SEO 描述、版权信息、社交网络入口均汇集于此：
 
 ```js
 export const siteConfig = {
-  title: "Your SaaS",
-  author: "Your Team",
+  title: "你的品牌名称",
+  author: "你的团队",
   url: "https://your-domain.com",
-  mail: "hello@your-domain.com",
+  mail: "contact@your-domain.com",
   meta: {
-    title: "Your SaaS - One-line value proposition",
-    description: "A clear, specific description of what your product does.",
-    keywords: "your, target, keywords",
+    title: "你的品牌 — 核心价值主张",
+    description: "精准且富有吸引力的站点定位描述。",
+    keywords: "关键词1, 关键词2, 关键词3",
     image: "/og.jpg",
   },
   social: {
-    twitter: "https://x.com/your-handle",
-    github: "https://github.com/your-org/your-repo",
+    twitter: "https://x.com/your-brand",
+    github: "https://github.com/your-brand",
   },
 };
 ```
 
-Set `PUBLIC_SITE_URL` in `.env` once you have a domain. The sitemap, RSS feed, and canonical URLs all read from it.
+部署前在 `.env` 中设置 `PUBLIC_SITE_URL`，系统便会自动将站点地图（Sitemap）、RSS 订阅源以及规范链接（Canonical URL）无缝对齐。
 
-## 2. Design tokens - `src/styles/global.css`
+## 2. 视觉令牌微调 — `src/styles/global.css`
 
-The template is colored through a small set of design tokens. To rebrand the site, change these once and let the rest of the UI follow:
+全站视觉基调由设计令牌统一管控。修改核心变量即可全局同步品牌色系：
 
 ```css
 @theme {
-  --color-primary: #2d6dc3;        /* your brand color */
-  --color-primary-strong: #0066ff; /* hover/emphasis */
-  --color-accent: #fad13b;         /* badges, highlights */
-  --color-bg-primary: #fdfaf5;     /* page canvas */
-  --font-brand: "Instrument Serif", serif;
-  --font-sans: "Inter", sans-serif;
+  --color-primary: #2d6dc3;        /* 品牌主色 */
+  --color-primary-strong: #1a4a8d; /* 交互强调态 */
+  --color-accent: #fad13b;         /* 点睛标识色 */
+  --color-bg-primary: #fdfaf5;     /* 画布基底色 */
 }
 ```
 
-The full token set is documented in `docs/DESIGN.md`. Do not introduce ad-hoc colors inside components unless you are intentionally extending the design system.
+## 3. 内容创作与发布 — `src/content/`
 
-## 3. Content - `src/content/`
+基于类型安全的 Content Layer 机制，新增技术长文或产品日志只需在 `src/content/post/` 下新建 Markdown 或 MDX 文件，系统便会自动进行 Schema 校验并生成规范的 SEO 路径。
 
-Blog posts and changelog entries live in `src/content/post/` and `src/content/changelog/` as MDX files. The frontmatter schema is defined in `src/content.config.js`:
-
-```yaml
----
-title: "Your post title"
-description: "One-sentence summary for cards and metadata"
-publishDate: 2026-05-18
-read: 7
-tags: ["Guide"]
-img: "/posts/your-image.jpg"
-img_alt: "Description for accessibility"
-featured: false
----
-```
-
-`featured: true` pins a post at the top of `/blog`. The body is plain Markdown plus any Astro component you choose to import.
-
-## What about the pages themselves?
-
-Section content such as Hero copy, Feature cards, Pricing tiers, and FAQ items lives inside each page file as plain JavaScript arrays. For example, `src/pages/index.astro` includes the homepage content near the top of the file.
-
-That is intentional. Most SaaS teams change marketing copy often, and going through a CMS for two-line edits can slow the work down. Treat the page files as your content source until you actually need a CMS.
-
-## Five-minute checklist
-
-When you clone the template, work through this in order:
-
-1. Update `src/config/site.js` - title, email, social links, and metadata
-2. Update `src/styles/global.css` - primary color, accent color, and typography tokens
-3. Edit `src/pages/index.astro` - Hero copy, feature arrays, pricing copy, and FAQ
-4. Replace `public/og.jpg` with your own social card (1200x630)
-5. Replace the logo asset or update `src/components/ui/Logo.astro`
-
-That is enough to deploy. Refine the rest as you go.
-
-## Deploying
-
-The build is fully static (`pnpm build` outputs `dist/`). Any static host works:
-
-| Host | Setup |
-|------|-------|
-| Vercel | Connect repo, framework preset = Astro |
-| Netlify | Connect repo, build = `pnpm build`, publish = `dist` |
-| Cloudflare Pages | Connect repo, build = `pnpm build`, output = `dist` |
-| GitHub Pages | Use a GitHub Actions workflow that builds Astro and publishes `dist` |
-
-That is it. From clone to live in under thirty minutes if you do not get distracted by the color picker.
+遵循清晰的工程约束，你便能在极短时间内构建出稳定、高效且具备独立灵魂的现代数字站点。

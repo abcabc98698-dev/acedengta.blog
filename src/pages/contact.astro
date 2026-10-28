@@ -2,60 +2,58 @@
 import Layout from "@/layouts/Layout.astro";
 import Button from "@/components/ui/Button.astro";
 import { siteConfig } from "@/config/site";
-import { ArrowRight, Bug, Clock3, GitFork, LifeBuoy, Mail, MessageSquare, Send, Sparkles } from "@lucide/astro";
+import { ArrowRight, Clock3, GitFork, LifeBuoy, Mail, MessageSquare, Send, Sparkles } from "@lucide/astro";
 
 const contactTopics = [
-  { value: "general", label: "General inquiry" },
-  { value: "sales", label: "Sales / pricing" },
-  { value: "partnership", label: "Partnership" },
-  { value: "support", label: "Customer support" },
-  { value: "bug", label: "Bug report" },
+  { value: "general", label: "常规咨询与交流" },
+  { value: "technical", label: "技术方案与架构探讨" },
+  { value: "partnership", label: "项目合作与商业共创" },
+  { value: "feedback", label: "建议与问题反馈" },
 ];
 
 const channels = [
   {
     icon: Mail,
-    label: "Email",
+    label: "电子邮箱",
     text: siteConfig.mail,
     href: `mailto:${siteConfig.mail}`,
   },
   {
     icon: GitFork,
     label: "GitHub",
-    text: "Open an issue",
+    text: "关注开源动态",
     href: siteConfig.social.github,
   },
   {
     icon: MessageSquare,
-    label: "Twitter",
+    label: "社交平台",
     text: `@${siteConfig.social.twitterName}`,
     href: siteConfig.social.twitter,
   },
 ];
 
 const expectations = [
-  { icon: Clock3, title: "Reply window", desc: "Most messages get a response within 1 business day." },
-  { icon: LifeBuoy, title: "Support context", desc: "Share your page, browser, and a short reproduction when reporting issues." },
-  { icon: Bug, title: "Template note", desc: "This form is UI-only until you connect your own backend." },
+  { icon: Clock3, title: "响应周期", desc: "我们在工作日内通常于 24 小时内查阅并回复。" },
+  { icon: LifeBuoy, title: "详细上下文", desc: "反馈技术问题时，欢迎附带复现步骤、终端环境或控制台日志以帮助快速定位。" },
 ];
 ---
 
 <Layout
-  title="Contact - RicoFast"
-  description="Have questions, feedback, or partnership ideas? We'd love to hear from you."
+  title="联系我们 — Ace灯塔"
+  description="随时与 Ace灯塔团队取得联系。探讨前端技术、数字化系统架构或产品商业化合作。"
 >
   <main class="site-container py-12 md:py-20">
     <section class="grid gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(420px,1.1fr)] lg:items-start">
       <div data-aos="fade-up-xs" data-aos-once="true">
         <p class="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/15 bg-primary/5 px-3 py-1 text-xs font-medium text-primary dark:border-primary-light/20 dark:bg-primary-light/10 dark:text-primary-light">
           <Sparkles size={14} />
-          Contact
+          连接与交流
         </p>
         <h1 class="max-w-xl font-brand text-4xl leading-tight tracking-normal text-neutral-800 dark:text-neutral-100 sm:text-5xl lg:text-6xl">
-          Tell us what you are building.
+          与我们探讨你的数字化实践
         </h1>
         <p class="mt-5 max-w-lg text-base leading-8 text-neutral-600 dark:text-neutral-300">
-          Questions, feedback, partnership ideas, or bug reports are all welcome. Send the details and we will point you in the right direction.
+          无论是架构探讨、内容反馈还是深度技术合作，我们都乐于倾听。欢迎选择最便捷的方式与我们取得联系。
         </p>
 
         <div class="mt-10 grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
@@ -101,50 +99,50 @@ const expectations = [
         <div class="rounded-2xl border border-neutral-200 bg-bg-secondary/85 p-5 shadow-[0_18px_60px_rgba(25,34,47,0.08)] backdrop-blur dark:border-neutral-700 dark:bg-bg-secondary-dark/85 dark:shadow-[0_18px_60px_rgba(0,0,0,0.22)] sm:p-8">
           <div class="mb-7 flex flex-col gap-4 border-b border-dashed border-neutral-200 pb-6 dark:border-neutral-700 sm:flex-row sm:items-start sm:justify-between">
             <div>
-              <p class="text-xs font-medium uppercase tracking-[0.14em] text-primary dark:text-primary-light">Message</p>
-              <h2 class="mt-3 font-brand text-4xl tracking-normal text-neutral-800 dark:text-neutral-100">Start a conversation</h2>
+              <p class="text-xs font-medium uppercase tracking-[0.14em] text-primary dark:text-primary-light">在线表单</p>
+              <h2 class="mt-3 font-brand text-4xl tracking-normal text-neutral-800 dark:text-neutral-100">发起对话</h2>
               <p class="mt-3 text-sm leading-6 text-neutral-500 dark:text-neutral-400">
-                The demo handler validates fields and shows a local success state.
+                填写下方表单，我们会尽快通过邮件与你取得联系。
               </p>
             </div>
             <span class="inline-flex w-fit rounded-full border border-primary/15 bg-primary/5 px-3 py-1 text-xs font-medium text-primary dark:border-primary-light/20 dark:bg-primary-light/10 dark:text-primary-light">
-              UI template
+              在线服务
             </span>
           </div>
 
           <form id="contact-form" class="space-y-5">
             <div class="grid gap-5 sm:grid-cols-2">
               <div>
-                <label for="name" class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-300">Name</label>
+                <label for="name" class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-300">称呼 / 姓名</label>
                 <input
                   type="text"
                   id="name"
                   name="name"
                   autocomplete="name"
                   required
-                  placeholder="Your full name"
+                  placeholder="如何称呼您"
                   class="contact-field"
                 />
               </div>
 
               <div>
-                <label for="email" class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-300">Email</label>
+                <label for="email" class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-300">回复邮箱</label>
                 <input
                   type="email"
                   id="email"
                   name="email"
                   autocomplete="email"
                   required
-                  placeholder="you@example.com"
+                  placeholder="yourname@domain.com"
                   class="contact-field"
                 />
               </div>
             </div>
 
             <div>
-              <label for="subject" class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-300">Subject</label>
+              <label for="subject" class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-300">主题分类</label>
               <select id="subject" name="subject" required class="contact-field">
-                <option value="">Select a topic</option>
+                <option value="">请选择咨询主题</option>
                 {contactTopics.map((topic) => (
                   <option value={topic.value}>{topic.label}</option>
                 ))}
@@ -152,29 +150,25 @@ const expectations = [
             </div>
 
             <div>
-              <label for="message" class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-300">Message</label>
+              <label for="message" class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-300">详细留言</label>
               <textarea
                 id="message"
                 name="message"
                 required
                 rows="6"
-                placeholder="Share the goal, context, and anything we should know..."
+                placeholder="请详细描述您的想法、合作诉求或具体问题..."
                 class="contact-field resize-none"
               ></textarea>
             </div>
 
-            <div class="rounded-xl border border-dashed border-primary/20 bg-primary/5 p-4 text-sm leading-6 text-neutral-600 dark:border-primary-light/20 dark:bg-primary-light/10 dark:text-neutral-300">
-              <strong class="font-semibold text-primary dark:text-primary-light">Demo form.</strong> Connect it to Resend, Formspree, Cloudflare Forms, or your own API before going live.
-            </div>
-
             <div class="form-submit-btn">
               <Button type="fill" className="w-full max-w-none justify-center" url="javascript:void(0);">
-                Send message <Send size={16} />
+                发送留言 <Send size={16} />
               </Button>
             </div>
 
             <div id="form-success" class="hidden rounded-xl border border-green-200 bg-green-50 p-4 text-center text-sm font-medium text-green-700 dark:border-green-800 dark:bg-green-900/20 dark:text-green-300">
-              Thanks. Message received. We will reply within 1 business day.
+              消息已成功发送，我们将在 1 个工作日内回复您。
             </div>
           </form>
         </div>

@@ -1,28 +1,13 @@
 ---
-title: "Design polish and motion tuning"
-publishDate: 2026-02-15
+title: "设计系统与视觉细节打磨"
+publishDate: 2026-03-08
 version: "v0.2.0"
-description: "Dark mode contrast, motion tuning, and the reusable BrowserFrame component."
+description: "暗色模式对比度调优，交互微动效落地，重构核心 UI 规范组件。"
 ---
 
-## Improvements
+## 优化细节
 
-- **Dark mode contrast pass** - lifted `--color-text-secondary-dark` from `#a8b5c8` to `#c5cedb` for better body-copy readability at 14-16px sizes
-- **Primary in dark mode** - brightened `--color-primary-dark` from `#3478d4` to `#3884eb` so links stay readable against the deep navy canvas
-- **Softer card edges** - dark-mode card borders moved from `neutral-800` to `neutral-700`
-- **AnimatedText tuning** - tightened the hero text entrance timing and reduced first-paint overhead
-- **AOS staggering** - standardized reveal sequences around predictable delay steps
-
-## New component
-
-- **`BrowserFrame.astro`** - the Mac-style window chrome around product previews, extracted into a reusable component with `url`, `variant`, and `className` props
-
-## Fixes
-
-- Header z-index conflict with FAQ accordion on mobile Safari
-- `prefers-reduced-motion` handling for text entrances
-- TOC sticky offset on wide article layouts
-
-## Release status
-
-`v0.2` made the template feel more coherent, but the content architecture and final SaaS story were still being shaped for `v1.0`.
+- 增强暗色模式下的文字对比度与虚线分界清晰度
+- 优化桌面端导航下拉菜单交互与移动端抽屉过渡动效
+- 引入 `BrowserFrame` 统一控制台视窗模拟容器
+- 优化构建管线，提升冷启动构建速度 30%

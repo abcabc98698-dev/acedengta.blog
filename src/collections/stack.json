@@ -2,31 +2,31 @@
 	{
 		"id": 1,
 		"name": "Astro",
-		"desc": "Zero JS by default",
+		"desc": "极速静态首屏与岛屿架构",
 		"image": "/assets/stack/astro.jpg"
 	},
 	{
 		"id": 2,
 		"name": "Tailwind CSS",
-		"desc": "@theme tokens + utilities",
+		"desc": "现代化原子样式系统",
 		"image": "/assets/stack/tailwind.jpg"
 	},
 	{
 		"id": 3,
-		"name": "Node.js",
-		"desc": "Runtime & tooling",
-		"image": "/assets/stack/node.jpg"
+		"name": "TypeScript",
+		"desc": "全栈强类型安全与严谨抽象",
+		"image": "/assets/stack/ts.jpg"
 	},
 	{
 		"id": 4,
-		"name": "GitHub",
-		"desc": "Version control & CI",
-		"image": "/assets/stack/figma.jpg"
+		"name": "Node.js",
+		"desc": "高效运行时与工程化生态",
+		"image": "/assets/stack/node.jpg"
 	},
 	{
 		"id": 5,
-		"name": "Cloudflare",
-		"desc": "Edge & CDN",
+		"name": "Motion",
+		"desc": "自然流畅的交互与微动效",
 		"image": "/assets/stack/motion.jpg"
 	}
 ]

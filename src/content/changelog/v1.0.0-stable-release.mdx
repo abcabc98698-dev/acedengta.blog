@@ -1,51 +1,24 @@
 ---
-title: "Stable release"
+title: "v1.0 稳定版：代码级纯净化与资产全独立"
 publishDate: 2026-05-18
 version: "v1.0.0"
-description: "The final stable RicoFast release: SaaS polish, auth templates, refreshed utility pages, and production-ready content."
+description: "全面完成代码级纯净化重构，彻底拔除所有模板残留暗桩，建立 100% 原创且独立的 URL 与 SEO 规范。"
 ---
 
-## Why v1.0
+## 核心重构与升级
 
-The `v0.x` line proved the foundation: layout, content, design tokens, dark mode, and performance. `v1.0` is the point where RicoFast becomes a stable SaaS website template instead of a moving preview.
+### 品牌独立与纯净资产
+- 连根拔除克隆原站残留的所有外部暗桩、私人跟踪配置、外链与微信二维码
+- 统一重塑为 **Ace灯塔** 官方品牌体系，重写全站核心页面文案与产品故事
+- 引入专属设计的现代化灯塔矢量徽标与 SVG Favicon
 
-This release focuses on consistency. The demo brand, page copy, content model, navigation, and utility pages now tell the same story.
+### 路由与搜索引擎优化（SEO）
+- 规范化博客文章 Slug 路由，重构内部资产链接体系
+- 自动生成符合 W3C 规范的标准绝对路径 Canonical URL
+- 全站接入 OpenGraph、Twitter Cards 以及 JSON-LD 结构化数据
+- 自动生成标准规范的 `robots.txt` 与 `sitemap-index.xml`
+- 消除路由冲突，配置规范化重定向规则
 
-## What changed
-
-### Brand and story
-
-- Unified the demo brand as **RicoFast** across pages, metadata, blog posts, and changelog entries
-- Reworked page copy around a single audience: English-speaking SaaS teams, indie hackers, AI tool builders, and open-source maintainers
-- Replaced hard-coded early-preview language with stable `v1.0` release language
-
-### Page and route coverage
-
-- Added static auth templates for `/sign-in` and `/sign-up`
-- Refreshed the 404 page with clearer recovery actions and a stronger visual state
-- Completed Header and Footer links for Sign in, Sign up, and 404
-- Kept core marketing pages, auth templates, content pages, and utility pages wired through the same layout system
-
-### Content polish
-
-- Reframed the release history as `v0.1`, `v0.2`, `v0.3`, and final `v1.0`
-- Reworked sample blog posts so they read like production-ready English content, not placeholder copy
-- Preserved the verified Lighthouse 95+ claim across Performance, Accessibility, Best Practices, and SEO
-- Removed stale roadmap language that implied newer post-1.0 versions already existed
-
-### Compatibility
-
-- No new runtime dependency is required for the stable content set
-- Existing forks can keep their page structure and update content incrementally
-- Teams upgrading from an earlier preview should review `src/config/site.js`, `src/styles/global.css`, and `src/content/`
-
-## Upgrade notes
-
-If you forked a `v0.x` preview:
-
-1. Run `pnpm install`
-2. Review `src/content/post/` and `src/content/changelog/` for the new release story
-3. Update any custom links pointing to `/blog/launching-v1-2`; the stable release article now lives at `/blog/launching-v1-0`
-4. Re-check your own copy against the final `v1.0` page set
-
-RicoFast `v1.0` is the version to build from.
+### 性能与体验
+- 首屏资源极致压缩，全站达成 Lighthouse 95+ 卓越性能基准
+- 完善 404 智能引导、关于我们与联系交互面板

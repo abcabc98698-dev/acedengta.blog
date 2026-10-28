@@ -2,7 +2,7 @@
 import Layout from "@/layouts/Layout.astro";
 import PageHeader from "@/components/elements/PageHeader.astro";
 import Button from "@/components/ui/Button.astro";
-import { siteConfig } from "@/config/site";
+
 import {
   LayoutDashboard, Layers, FileText, Sparkles, Zap, Palette,
   ArrowRight, Check
@@ -61,7 +61,7 @@ const featureModules = [
 ---
 
 <Layout
-  title="Features — RicoFast"
+  title="特性概览 — Ace灯塔"
   description="Everything you need to build a modern SaaS site. Carefully designed sections and production-ready components."
 >
   <section class="site-container my-12">
@@ -145,7 +145,7 @@ const featureModules = [
                 <div><span class="text-primary">tags</span>: [<span class="text-emerald-600 dark:text-emerald-400">"Release"</span>]</div>
                 <div class="text-neutral-400">---</div>
                 <div class="mt-2"><span class="text-amber-600 dark:text-amber-400">## What's new</span></div>
-                <div class="mt-1">Three months after v1, RicoFast</div>
+                <div class="mt-1">持续演进迭代，Ace灯塔</div>
                 <div>v1.2 ships today.</div>
                 <div class="mt-2 text-purple-600 dark:text-purple-400">&lt;Callout type="success"&gt;</div>
                 <div class="pl-4">Lighthouse 95+ across the board</div>
@@ -230,8 +230,8 @@ const featureModules = [
         <Button url="/" type="fill" className="text-lg px-8 py-3">
           View Live Demo <ArrowRight size={18} />
         </Button>
-        <Button url={siteConfig.social.github} className="text-lg px-8 py-3" target="_blank">
-          Get Template
+        <Button url="/about" className="text-lg px-8 py-3">
+          了解关于灯塔
         </Button>
       </div>
     </div>

@@ -1,45 +1,114 @@
 ---
 import { siteConfig } from '@/config/site.js';
+
 export interface Props {
   title?: string;
   description?: string;
   keywords?: string;
   url?: string;
   ogImage?: string;
+  ogType?: 'website' | 'article';
+  publishDate?: Date | string;
   twitterHandle?: string;
 }
 
 const {
-  title,
-  description,
-  keywords = "",
-  url = siteConfig.url, //
-  ogImage = "/og.jpg",
-  twitterHandle = siteConfig.social.twitterName || '',
+  title = siteConfig.meta.title,
+  description = siteConfig.meta.description,
+  keywords = siteConfig.meta.keywords,
+  url,
+  ogImage = siteConfig.meta.image || "/og.jpg",
+  ogType = "website",
+  publishDate,
+  twitterHandle = siteConfig.meta.twitterHandle || siteConfig.social.twitterName || '',
 } = Astro.props;
+
+// Canonical URL calculation
+const canonicalURL = url ? new URL(url, siteConfig.url).href : new URL(Astro.url.pathname, siteConfig.url).href;
+const formattedOgImage = ogImage.startsWith('http') ? ogImage : new URL(ogImage, siteConfig.url).href;
+
+// JSON-LD structured data
+const jsonLd = ogType === 'article'
+  ? {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": title,
+      "description": description,
+      "image": formattedOgImage,
+      "datePublished": publishDate ? new Date(publishDate).toISOString() : undefined,
+      "author": {
+        "@type": "Person",
+        "name": siteConfig.author,
+        "url": siteConfig.url
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": siteConfig.title,
+        "url": siteConfig.url,
+        "logo": {
+          "@type": "ImageObject",
+          "url": new URL("/assets/logo.png", siteConfig.url).href
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": canonicalURL
+      }
+    }
+  : {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": siteConfig.title,
+      "url": siteConfig.url,
+      "description": description,
+      "publisher": {
+        "@type": "Organization",
+        "name": siteConfig.title,
+        "url": siteConfig.url
+      }
+    };
 ---
 
-<!-- Meta Tags -->
+<!-- Basic Meta Tags -->
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="icon" type="image/svg+xml" href="/favicon.png" />
 <title>{title}</title>
 <meta name="description" content={description} />
 <meta name="keywords" content={keywords} />
 <meta name="author" content={siteConfig.author} />
+<meta name="robots" content="index, follow" />
+
+<!-- Canonical URL -->
+<link rel="canonical" href={canonicalURL} />
+
+<!-- Favicon & Icons -->
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="icon" type="image/png" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/favicon.png" />
+<link rel="sitemap" href="/sitemap-index.xml" />
+<link rel="alternate" type="application/rss+xml" title={siteConfig.title} href="/rss.xml" />
 
 <!-- Open Graph Tags -->
-<meta property="og:type" content="website" />
+<meta property="og:locale" content="zh_CN" />
+<meta property="og:type" content={ogType} />
+<meta property="og:site_name" content={siteConfig.title} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
-<meta property="og:url" content={url} />
-<meta property="og:image" content={ogImage} />
-<meta property="og:site_name" content={title} />
+<meta property="og:url" content={canonicalURL} />
+<meta property="og:image" content={formattedOgImage} />
+<meta property="og:image:alt" content={title} />
 
 <!-- Twitter Meta Tags -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
-<meta name="twitter:image" content={ogImage} />
-<meta name="twitter:site" content={twitterHandle} />
-<meta name="twitter:creator" content={twitterHandle} />
+<meta name="twitter:image" content={formattedOgImage} />
+{twitterHandle && (
+  <>
+    <meta name="twitter:site" content={`@${twitterHandle}`} />
+    <meta name="twitter:creator" content={`@${twitterHandle}`} />
+  </>
+)}
+
+<!-- Structured Data (JSON-LD) -->
+<script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />

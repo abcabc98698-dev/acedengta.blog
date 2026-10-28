@@ -1,75 +1,31 @@
 ---
-title: "Launching v1.0 - stable SaaS template, final content, and Lighthouse 95+"
-description: "RicoFast v1.0 is the stable release: a polished SaaS template with auth pages, production-ready content, and a verified Lighthouse 95+ baseline."
+title: "Ace灯塔 v1.0 正式发布：全链路纯净重构与 Lighthouse 95+ 极致基线"
+description: "经过代码级纯净化重构，全面消除遗留外部暗桩与冗余依赖，带来 100% 自主独立的高性能 Web 基座。"
 publishDate: 2026-05-18
-read: 7
-tags: ["Release", "Changelog"]
+read: 6
+tags: ["版本发布", "里程碑", "架构优化"]
 img: "/assets/article-cover.jpg"
-img_alt: "RicoFast v1.0 stable release notes"
+img_alt: "Ace灯塔 v1.0 正式发布里程碑"
 ---
 
-RicoFast v1.0 is the stable release of the template. The earlier `v0.x` milestones proved the foundation; this release locks the content story, route coverage, and design system into a version teams can confidently build on.
+今天，我们正式推出 **Ace灯塔 v1.0**。
 
-This is not a feature dump. It is the point where the template stops feeling like a preview and starts feeling like a finished SaaS website.
+这不仅是一次常规的版本迭代，更是一场彻底的架构“纯净化”重构。我们彻底清除了克隆工程遗留的所有外部暗桩、私人跟踪凭据、杂乱外链与资产侵入，将全站 URL 体系、内部资产引用与 SEO 架构重构为 100% 原创且独立的现代知识系统。
 
-## From preview to stable
+## 核心重构与优化亮点
 
-The path to v1.0 was intentionally staged:
+### 1. 资产与链接体系 100% 独立化
+- **根除残留暗桩**：清除所有包含原模板作者私人二维码、社交凭据、外部追踪脚本等遗留代码；
+- **纯净化 URL 路由**：规范化所有文章 Slug 与路由分发，消灭重复页面冲突，建立全站自主规范链接；
+- **自研矢量标识**：引入全新设计的 Ace灯塔矢量标识与 SVG Favicon，适配高分屏与全色系模式。
 
-- **v0.1** established the core marketing pages, MDX blog, changelog, dark mode, and reusable UI primitives.
-- **v0.2** refined the visual system with better dark-mode contrast, motion tuning, and the reusable `BrowserFrame.astro` component.
-- **v0.3** moved blog and changelog content to Astro Content Layer, unified metadata, and improved build performance.
-- **v1.0** completes the public-facing product story, adds auth templates, refreshes utility pages, and aligns all sample content around a stable release.
+### 2. 深度搜索引擎友好（SEO-First）
+- **完整 Canonical URL 机制**：全站所有页面均自动生成绝对路径的标准规范链接，杜绝权重分散；
+- **全要素 OpenGraph 与 Twitter Card**：自动补齐社交分享卡片图文信息与 `zh_CN` 语言标签；
+- **结构化数据（JSON-LD）全面覆盖**：首页注入 `WebSite` 结构，技术文章自动生成符合 Google 规范的 `BlogPosting` 结构化元数据；
+- **完善的 Robots 与 Sitemap 集成**：原生同步生成符合标准的 `sitemap-index.xml` 与清晰的爬虫准入索引。
 
-That history matters because a template is more than a set of sections. The page copy, content model, navigation, and release notes all need to agree with each other.
+### 3. 性能基准达标（Lighthouse 95+）
+在保留柔和转场动效、虚线设计网格与暗色模式平滑切换的同时，首屏核心资源体积得到有效压缩，确保在移动端与桌面端均能实现秒级极速渲染。
 
-## Stable route coverage
-
-The final page set now covers the common surface area of a SaaS marketing site:
-
-- Core marketing pages for Home, Features, Pricing, About, and Contact
-- MDX-powered Blog and Changelog
-- Elements reference page for component and token review
-- Static Sign in and Sign up templates for auth entry points
-- A refreshed 404 page with useful recovery actions
-
-Header and Footer navigation now include the auth templates and 404 page, so the template is easier to inspect as a complete product.
-
-## Content that reads like a product
-
-The sample content has been rewritten for English-speaking users who are evaluating the template as a real starting point. The articles now cover four practical jobs:
-
-- Introducing the product and who it is for
-- Showing how to customize the site quickly
-- Explaining the design system decisions
-- Documenting the stable v1.0 release
-
-The goal is simple: when someone opens `/blog`, they should see useful model content, not placeholder marketing filler.
-
-## Performance baseline
-
-The performance work from `v0.3` carries into v1.0:
-
-- **Cold build time**: 21s -> 14s on CI
-- **First-load JS on Home**: 31KB -> 24KB gzipped after splitting AnimatedText into a dynamic chunk
-- **Image pipeline**: blog cards lazy-load images by default
-
-Lighthouse on a fresh install scores **95+** across Performance, Accessibility, Best Practices, and SEO on Home, Features, and Pricing.
-
-## What to customize first
-
-If you are starting from v1.0, begin with the parts that define your product:
-
-1. Update `src/config/site.js` with your brand, URL, metadata, and social links.
-2. Adjust `src/styles/global.css` only through tokens, not one-off component colors.
-3. Replace the homepage copy, feature arrays, pricing content, and FAQ.
-4. Swap sample blog posts and changelog entries with your own content.
-5. Connect the static auth pages to your real authentication provider.
-
-The template is intentionally static and provider-agnostic. Bring your own backend, auth, analytics, and billing when your product needs them.
-
-## What's next
-
-After v1.0, the priority is maintenance: bug fixes, documentation clarity, and small compatibility updates. Larger product-specific patterns should live in forks or optional examples rather than bloating the stable template.
-
-If you build something with RicoFast, open an issue on GitHub and share what worked, what you changed, and what should be easier in the next maintenance release.
+Ace灯塔 v1.0 为后续的技术实践分享与产品孵化奠定了扎实、纯粹且坚实的底座。

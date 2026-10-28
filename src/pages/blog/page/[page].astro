@@ -33,7 +33,7 @@ const { page } = Astro.props;
 const currentPage = parseInt(page);
 ---
 
-<Layout title={`Blog — RicoFast`} description="Latest articles, updates, and insights from the RicoFast team.">
+<Layout title={`技术博客 (第 ${currentPage} 页) — Ace灯塔`} description="探索前沿前端架构、高效工程化工具、独立产品开发与深度技术思考。">
   <section class="relative z-20 container mx-auto my-12 px-7 lg:px-0">
     <PageHeader
       title="Blog"

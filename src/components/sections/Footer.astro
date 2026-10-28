@@ -7,29 +7,29 @@ const currentYear = new Date().getFullYear();
 
 const footerLinks = {
   product: [
-    { name: "Features", url: "/features" },
-    { name: "Pricing", url: "/pricing" },
-    { name: "Changelog", url: "/changelog" },
-    { name: "Sign in", url: "/sign-in" },
-    { name: "Sign up", url: "/sign-up" },
+    { name: "核心特性", url: "/features" },
+    { name: "方案定价", url: "/pricing" },
+    { name: "更新日志", url: "/changelog" },
+    { name: "用户登录", url: "/sign-in" },
+    { name: "即刻注册", url: "/sign-up" },
   ],
   resources: [
-    { name: "Blog", url: "/blog" },
-    { name: "Elements", url: "/elements" },
-    { name: "404", url: "/404" },
-    { name: "Docs", url: siteConfig.social.github + "#readme" },
-    { name: "GitHub", url: siteConfig.social.github },
+    { name: "深度博客", url: "/blog" },
+    { name: "设计规范", url: "/elements" },
+    { name: "RSS 订阅", url: "/rss.xml" },
+    { name: "站点地图", url: "/sitemap-index.xml" },
+    { name: "开源仓库", url: siteConfig.social.github },
   ],
   company: [
-    { name: "About", url: "/about" },
-    { name: "Contact", url: "/contact" },
+    { name: "关于灯塔", url: "/about" },
+    { name: "联系我们", url: "/contact" },
   ],
   legal: [
-    { name: "License (MIT)", url: siteConfig.social.github + "/blob/main/LICENSE" },
+    { name: "开源许可 (MIT)", url: "/about" },
   ],
 };
 
-const templateVersion = "v1.0.0";
+const version = "v1.0.0";
 ---
 
 <section class="text-gray-700 border-t mt-20 md:mt-48 border-dashed border-primary/15 dark:border-primary-dark/15 border-[.75px]">
@@ -39,7 +39,7 @@ const templateVersion = "v1.0.0";
       <div class="max-w-sm">
         <Logo />
         <p class="mt-4 text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed">
-          A polished SaaS template built with Astro and Tailwind CSS. Open-source, fast, and ready for production.
+          专注于数字化技术实践、敏捷工程化工具、现代前端架构与独立产品商业化的探索与沉淀。
         </p>
       </div>
 
@@ -47,7 +47,7 @@ const templateVersion = "v1.0.0";
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-8 md:gap-12">
         <!-- Product -->
         <div>
-          <h4 class="text-sm font-semibold text-neutral-800 dark:text-neutral-200 mb-4">Product</h4>
+          <h4 class="text-sm font-semibold text-neutral-800 dark:text-neutral-200 mb-4">产品</h4>
           <ul class="space-y-3">
             {footerLinks.product.map((link) => (
               <li>
@@ -61,7 +61,7 @@ const templateVersion = "v1.0.0";
 
         <!-- Resources -->
         <div>
-          <h4 class="text-sm font-semibold text-neutral-800 dark:text-neutral-200 mb-4">Resources</h4>
+          <h4 class="text-sm font-semibold text-neutral-800 dark:text-neutral-200 mb-4">资源</h4>
           <ul class="space-y-3">
             {footerLinks.resources.map((link) => (
               <li>
@@ -75,7 +75,7 @@ const templateVersion = "v1.0.0";
 
         <!-- Company -->
         <div>
-          <h4 class="text-sm font-semibold text-neutral-800 dark:text-neutral-200 mb-4">Company</h4>
+          <h4 class="text-sm font-semibold text-neutral-800 dark:text-neutral-200 mb-4">关于</h4>
           <ul class="space-y-3">
             {footerLinks.company.map((link) => (
               <li>
@@ -89,7 +89,7 @@ const templateVersion = "v1.0.0";
 
         <!-- Legal -->
         <div>
-          <h4 class="text-sm font-semibold text-neutral-800 dark:text-neutral-200 mb-4">Legal</h4>
+          <h4 class="text-sm font-semibold text-neutral-800 dark:text-neutral-200 mb-4">条款</h4>
           <ul class="space-y-3">
             {footerLinks.legal.map((link) => (
               <li>
@@ -107,23 +107,23 @@ const templateVersion = "v1.0.0";
     <div class="border-t border-dashed border-primary/10 dark:border-primary-dark/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
       <p class="text-sm text-neutral-400 dark:text-neutral-500">
         © {currentYear}
-        <a href={siteConfig.url || " "} target="_blank" class="hover:text-primary dark:hover:text-primary-light transition-colors">{siteConfig.author || " "}</a>.
-        Released under the MIT License.
+        <a href={siteConfig.url || "/"} class="hover:text-primary dark:hover:text-primary-light transition-colors">{siteConfig.author || "Ace灯塔"}</a>.
+        All rights reserved.
       </p>
 
       <div class="flex items-center gap-4">
         <span class="inline-flex items-center gap-2 text-xs text-neutral-400 dark:text-neutral-500">
           <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full border border-dashed border-primary/30 text-primary/80">
             <span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
-            {templateVersion}
+            {version}
           </span>
-          <span>Built with Astro & Tailwind</span>
+          <span>Ace灯塔系统</span>
         </span>
         <span class="inline-flex justify-center space-x-4">
           {socialLinks.map((social) => (
             <a
               href={social.url}
-              target="_blank"
+              target={social.url.startsWith("http") ? "_blank" : "_self"}
               class="footer-social-icon-link text-neutral-400 dark:text-neutral-500 hover:text-primary dark:hover:text-primary-light transition-colors duration-200"
               title={social.name}
             >
