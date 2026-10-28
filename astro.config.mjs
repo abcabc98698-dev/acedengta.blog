@@ -16,6 +16,8 @@ export default defineConfig({
   redirects: {
     '/signin': '/sign-in',
     '/signup': '/sign-up',
+    '/blog/iepl-vless-network-architecture-guide': '/blog/vless-iepl-architecture-analysis',
+    '/blog/clash-verge-windows-mac-guide': '/blog/clash-verge-setup-guide',
   },
   vite: {
     plugins: [tailwindcss()],
