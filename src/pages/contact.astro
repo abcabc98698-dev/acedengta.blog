@@ -1,148 +1,132 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import Button from "@/components/ui/Button.astro";
-import { siteConfig } from "@/config/site";
-import { ArrowRight, Clock3, GitFork, LifeBuoy, Mail, MessageSquare, Send, Sparkles } from "@lucide/astro";
+import { siteConfig, REGISTER_URL } from "@/config/site";
+import { ArrowRight, Clock3, LifeBuoy, Mail, MessageSquare, Send, Sparkles, ShieldCheck, Ticket } from "@lucide/astro";
 
 const contactTopics = [
-  { value: "general", label: "常规咨询与交流" },
-  { value: "technical", label: "技术方案与架构探讨" },
-  { value: "partnership", label: "项目合作与商业共创" },
-  { value: "feedback", label: "建议与问题反馈" },
+  { value: "general", label: "账户注册与开通咨询" },
+  { value: "setup", label: "客户端配置与订阅导入指导" },
+  { value: "custom", label: "企业定制版（独享原生IP）需求洽谈" },
+  { value: "business", label: "商务合作与企业采购" },
 ];
 
 const channels = [
   {
-    icon: Mail,
-    label: "电子邮箱",
-    text: siteConfig.mail,
-    href: `mailto:${siteConfig.mail}`,
+    icon: Ticket,
+    label: "官方用户中心工单 (推荐)",
+    text: "登录控制台提交工单，技术专员优先处理",
+    href: REGISTER_URL,
+    isExternal: true,
   },
   {
-    icon: GitFork,
-    label: "GitHub",
-    text: "关注开源动态",
-    href: siteConfig.social.github,
+    icon: Mail,
+    label: "官方客服邮箱",
+    text: siteConfig.mail,
+    href: `mailto:${siteConfig.mail}`,
+    isExternal: false,
   },
   {
     icon: MessageSquare,
-    label: "社交平台",
-    text: `@${siteConfig.social.twitterName}`,
-    href: siteConfig.social.twitter,
+    label: "官方 Telegram 频道",
+    text: "第一时间获取节点扩容与维护通知",
+    href: siteConfig.social.telegram,
+    isExternal: true,
   },
-];
-
-const expectations = [
-  { icon: Clock3, title: "响应周期", desc: "我们在工作日内通常于 24 小时内查阅并回复。" },
-  { icon: LifeBuoy, title: "详细上下文", desc: "反馈技术问题时，欢迎附带复现步骤、终端环境或控制台日志以帮助快速定位。" },
 ];
 ---
 
 <Layout
-  title="联系我们 — Ace灯塔"
-  description="随时与 Ace灯塔团队取得联系。探讨前端技术、数字化系统架构或产品商业化合作。"
+  title="客户支持与官方联系 — 灯塔加速器官方品牌官网"
+  description="灯塔加速器官方客户支持门户。提供 7×24 小时工单技术支持、客户端配置解答及企业定制专线咨询。"
 >
   <main class="site-container py-12 md:py-20">
     <section class="grid gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(420px,1.1fr)] lg:items-start">
       <div data-aos="fade-up-xs" data-aos-once="true">
         <p class="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/15 bg-primary/5 px-3 py-1 text-xs font-medium text-primary dark:border-primary-light/20 dark:bg-primary-light/10 dark:text-primary-light">
           <Sparkles size={14} />
-          连接与交流
+          官方专业支持
         </p>
-        <h1 class="max-w-xl font-brand text-4xl leading-tight tracking-normal text-neutral-800 dark:text-neutral-100 sm:text-5xl lg:text-6xl">
-          与我们探讨你的数字化实践
+        <h1 class="max-w-xl font-brand text-4xl leading-tight tracking-normal text-neutral-800 dark:text-neutral-100 sm:text-5xl lg:text-6xl font-bold">
+          竭诚为您提供 7×24 专业网络支持
         </h1>
-        <p class="mt-5 max-w-lg text-base leading-8 text-neutral-600 dark:text-neutral-300">
-          无论是架构探讨、内容反馈还是深度技术合作，我们都乐于倾听。欢迎选择最便捷的方式与我们取得联系。
+        <p class="mt-5 max-w-lg text-base leading-relaxed text-neutral-600 dark:text-neutral-300">
+          无论您是在客户端配置过程中遇到疑问，还是需要为跨境企业团队定制独享专线带宽，我们都将为您提供详尽清晰的解答。
         </p>
 
-        <div class="mt-10 grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
-          {channels.map(({ icon: Icon, label, text, href }, index) => (
+        <div class="mt-10 grid gap-3.5">
+          {channels.map(({ icon: Icon, label, text, href, isExternal }, index) => (
             <a
               href={href}
-              target={href.startsWith("http") ? "_blank" : "_self"}
-              class="group flex items-center gap-4 rounded-xl border border-neutral-200 bg-bg-secondary/75 p-4 transition-all hover:-translate-y-0.5 hover:border-primary/35 hover:shadow-[0_14px_35px_rgba(25,34,47,0.08)] dark:border-neutral-700 dark:bg-bg-secondary-dark/75 dark:hover:border-primary-light/35 dark:hover:shadow-[0_14px_35px_rgba(0,0,0,0.22)]"
+              target={isExternal ? "_blank" : "_self"}
+              rel={isExternal ? "nofollow noopener noreferrer" : undefined}
+              class="group flex items-center gap-4 rounded-2xl border border-neutral-200 bg-bg-secondary/75 p-4 sm:p-5 transition-all hover:-translate-y-0.5 hover:border-primary/35 hover:shadow-md dark:border-neutral-700 dark:bg-bg-secondary-dark/75"
               data-aos="fade-up-xs"
               data-aos-delay={`${index * 100}`}
               data-aos-once="true"
             >
-              <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white text-primary shadow-sm ring-1 ring-neutral-200/70 transition-colors group-hover:bg-primary group-hover:text-white dark:bg-neutral-900/60 dark:text-primary-light dark:ring-neutral-700 dark:group-hover:bg-primary-light dark:group-hover:text-neutral-950">
-                <Icon size={18} />
+              <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white text-primary shadow-sm ring-1 ring-neutral-200/70 transition-colors group-hover:bg-primary group-hover:text-white dark:bg-neutral-900/60 dark:text-primary-light dark:ring-neutral-700">
+                <Icon size={20} />
               </span>
               <span class="min-w-0">
-                <span class="block text-sm font-semibold text-neutral-800 dark:text-neutral-100">{label}</span>
-                <span class="mt-0.5 block truncate text-sm text-neutral-500 transition-colors group-hover:text-primary dark:text-neutral-400 dark:group-hover:text-primary-light">{text}</span>
+                <span class="block text-sm font-bold text-neutral-800 dark:text-neutral-100">{label}</span>
+                <span class="mt-0.5 block truncate text-xs text-neutral-500 transition-colors group-hover:text-primary dark:text-neutral-400">{text}</span>
               </span>
-              <ArrowRight class="ml-auto h-4 w-4 shrink-0 text-neutral-300 transition-all group-hover:translate-x-1 group-hover:text-primary dark:text-neutral-600 dark:group-hover:text-primary-light" />
+              <ArrowRight class="ml-auto h-4 w-4 shrink-0 text-neutral-300 transition-all group-hover:translate-x-1 group-hover:text-primary dark:text-neutral-600" />
             </a>
           ))}
         </div>
 
-        <div class="mt-8 border-y border-dashed border-neutral-200 py-6 dark:border-neutral-700" data-aos="fade-up-xs" data-aos-delay="200" data-aos-once="true">
-          <div class="grid gap-5">
-            {expectations.map(({ icon: Icon, title, desc }) => (
-              <div class="flex gap-3">
-                <span class="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary-lighter/10 text-neutral-800 dark:bg-primary-lighter/10 dark:text-neutral-400">
-                  <Icon size={16} /> 
-                </span>
-                <div>
-                  <h2 class="text-sm font-semibold text-neutral-800 dark:text-neutral-100">{title}</h2>
-                  <p class="mt-1 text-sm leading-6 text-neutral-500 dark:text-neutral-400">{desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
+        <div class="mt-8 p-4 rounded-xl border border-dashed border-primary/20 bg-primary/5 text-xs text-neutral-600 dark:text-neutral-400 space-y-1">
+          <p class="font-semibold text-primary dark:text-primary-light flex items-center gap-1.5">
+            <Clock3 size={14} /> 服务响应周期承诺
+          </p>
+          <p>官方工单支持在正常工作时段内通常于 30 分钟内回复，节假日与夜间工单将于 2-4 小时内处理。</p>
         </div>
       </div>
 
+      <!-- Quick Message Form -->
       <div class="mx-auto w-full max-w-xl lg:max-w-none" data-aos="fade-up-xs" data-aos-delay="100" data-aos-once="true">
-        <div class="rounded-2xl border border-neutral-200 bg-bg-secondary/85 p-5 shadow-[0_18px_60px_rgba(25,34,47,0.08)] backdrop-blur dark:border-neutral-700 dark:bg-bg-secondary-dark/85 dark:shadow-[0_18px_60px_rgba(0,0,0,0.22)] sm:p-8">
-          <div class="mb-7 flex flex-col gap-4 border-b border-dashed border-neutral-200 pb-6 dark:border-neutral-700 sm:flex-row sm:items-start sm:justify-between">
-            <div>
-              <p class="text-xs font-medium uppercase tracking-[0.14em] text-primary dark:text-primary-light">在线表单</p>
-              <h2 class="mt-3 font-brand text-4xl tracking-normal text-neutral-800 dark:text-neutral-100">发起对话</h2>
-              <p class="mt-3 text-sm leading-6 text-neutral-500 dark:text-neutral-400">
-                填写下方表单，我们会尽快通过邮件与你取得联系。
-              </p>
-            </div>
-            <span class="inline-flex w-fit rounded-full border border-primary/15 bg-primary/5 px-3 py-1 text-xs font-medium text-primary dark:border-primary-light/20 dark:bg-primary-light/10 dark:text-primary-light">
-              在线服务
-            </span>
+        <div class="rounded-3xl border border-neutral-200 bg-bg-secondary/85 p-6 shadow-xl shadow-primary/5 backdrop-blur dark:border-neutral-700 dark:bg-bg-secondary-dark/85 sm:p-8">
+          <div class="mb-7 flex flex-col gap-2 border-b border-dashed border-neutral-200 pb-6 dark:border-neutral-700">
+            <p class="text-xs font-semibold uppercase tracking-wider text-primary dark:text-primary-light">在线咨询</p>
+            <h2 class="font-brand text-3xl font-bold text-neutral-800 dark:text-neutral-100">快速留言与反馈</h2>
+            <p class="text-xs sm:text-sm text-neutral-500 dark:text-neutral-400">
+              请留下您的疑问或商务诉求，我们会在第一时间通过邮件与您联系。
+            </p>
           </div>
 
-          <form id="contact-form" class="space-y-5">
-            <div class="grid gap-5 sm:grid-cols-2">
+          <form id="contact-form" class="space-y-4">
+            <div class="grid gap-4 sm:grid-cols-2">
               <div>
-                <label for="name" class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-300">称呼 / 姓名</label>
+                <label for="name" class="mb-1.5 block text-xs font-semibold text-neutral-700 dark:text-neutral-300">您的称呼</label>
                 <input
                   type="text"
                   id="name"
                   name="name"
-                  autocomplete="name"
                   required
                   placeholder="如何称呼您"
-                  class="contact-field"
+                  class="contact-field text-sm"
                 />
               </div>
 
               <div>
-                <label for="email" class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-300">回复邮箱</label>
+                <label for="email" class="mb-1.5 block text-xs font-semibold text-neutral-700 dark:text-neutral-300">联系邮箱</label>
                 <input
                   type="email"
                   id="email"
                   name="email"
-                  autocomplete="email"
                   required
                   placeholder="yourname@domain.com"
-                  class="contact-field"
+                  class="contact-field text-sm"
                 />
               </div>
             </div>
 
             <div>
-              <label for="subject" class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-300">主题分类</label>
-              <select id="subject" name="subject" required class="contact-field">
-                <option value="">请选择咨询主题</option>
+              <label for="subject" class="mb-1.5 block text-xs font-semibold text-neutral-700 dark:text-neutral-300">咨询分类</label>
+              <select id="subject" name="subject" required class="contact-field text-sm">
+                <option value="">请选择咨询分类</option>
                 {contactTopics.map((topic) => (
                   <option value={topic.value}>{topic.label}</option>
                 ))}
@@ -150,25 +134,25 @@ const expectations = [
             </div>
 
             <div>
-              <label for="message" class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-300">详细留言</label>
+              <label for="message" class="mb-1.5 block text-xs font-semibold text-neutral-700 dark:text-neutral-300">详细描述</label>
               <textarea
                 id="message"
                 name="message"
                 required
-                rows="6"
-                placeholder="请详细描述您的想法、合作诉求或具体问题..."
-                class="contact-field resize-none"
+                rows="5"
+                placeholder="请详细描述您的需求、问题复现步骤或定制方案细节..."
+                class="contact-field resize-none text-sm"
               ></textarea>
             </div>
 
-            <div class="form-submit-btn">
-              <Button type="fill" className="w-full max-w-none justify-center" url="javascript:void(0);">
-                发送留言 <Send size={16} />
+            <div class="form-submit-btn pt-2">
+              <Button type="fill" className="w-full max-w-none justify-center py-3 text-sm font-semibold" url="javascript:void(0);">
+                提交留言信息 <Send size={15} />
               </Button>
             </div>
 
-            <div id="form-success" class="hidden rounded-xl border border-green-200 bg-green-50 p-4 text-center text-sm font-medium text-green-700 dark:border-green-800 dark:bg-green-900/20 dark:text-green-300">
-              消息已成功发送，我们将在 1 个工作日内回复您。
+            <div id="form-success" class="hidden rounded-xl border border-green-200 bg-green-50 p-4 text-center text-xs sm:text-sm font-medium text-green-700 dark:border-green-800 dark:bg-green-900/20 dark:text-green-300">
+              您的留言已成功提交，技术专员将尽快查阅并回复您。
             </div>
           </form>
         </div>
@@ -183,36 +167,19 @@ const expectations = [
     border-radius: 0.75rem;
     border: 1px solid var(--color-neutral-200);
     background: color-mix(in srgb, var(--color-bg-secondary) 82%, transparent);
-    padding: 0.875rem 1rem;
+    padding: 0.75rem 1rem;
     color: var(--color-neutral-800);
     outline: none;
-    transition: border-color 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+    transition: all 180ms ease;
   }
-
-  .contact-field::placeholder {
-    color: var(--color-neutral-400);
-  }
-
   .contact-field:focus {
     border-color: var(--color-primary);
-    background: var(--color-bg-secondary);
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 22%, transparent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 20%, transparent);
   }
-
   :global(.dark) .contact-field {
     border-color: var(--color-neutral-700);
     background: color-mix(in srgb, var(--color-bg-secondary-dark) 82%, transparent);
     color: var(--color-neutral-100);
-  }
-
-  :global(.dark) .contact-field::placeholder {
-    color: var(--color-neutral-500);
-  }
-
-  :global(.dark) .contact-field:focus {
-    border-color: var(--color-primary-light);
-    background: var(--color-bg-secondary-dark);
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary-light) 18%, transparent);
   }
 </style>
 
@@ -223,15 +190,12 @@ const expectations = [
 
   submitBtn?.addEventListener('click', (event) => {
     event.preventDefault();
-
     if (!form?.checkValidity()) {
       form?.reportValidity();
       return;
     }
-
     successMsg?.classList.remove('hidden');
     form.reset();
-
     setTimeout(() => {
       successMsg?.classList.add('hidden');
     }, 5000);

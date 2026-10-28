@@ -2,236 +2,135 @@
 import Layout from "@/layouts/Layout.astro";
 import PageHeader from "@/components/elements/PageHeader.astro";
 import Button from "@/components/ui/Button.astro";
-
+import { REGISTER_URL } from "@/config/site";
 import {
-  LayoutDashboard, Layers, FileText, Sparkles, Zap, Palette,
-  ArrowRight, Check
+  Zap, Cpu, Globe, Sparkles, Laptop, ShieldCheck,
+  CheckCircle2, ArrowRight, Activity, Lock, RefreshCw, Network
 } from "@lucide/astro";
 
-const featureModules = [
+const deepFeatures = [
   {
-    icon: LayoutDashboard,
-    title: "Clean, scalable page structure",
-    desc: "Nine pre-built pages — Home, Features, Pricing, Blog, Changelog, About, Contact, Elements, 404 — wired with consistent hierarchy, spacing, and typography. Add your tenth without re-deciding any of it.",
-    points: ["9 pre-built page templates", "Token-driven spacing (4 / 8 / 12 / 16 / 24 …)", "1200px max-width, 800px inner content", "Mobile-first responsive (375 / 768 / 1024 / 1440)"],
-    direction: "left",
-    visual: "wireframe",
+    icon: Zap,
+    title: "企业级 IEPL / IPLC 纯内网专线",
+    subtitle: "拒绝拥堵公网，物理专线直连过境",
+    desc: "传统网络加速往往依赖公网国际出口，晚高峰时期极易受到运营商QoS限速与公网丢包风暴影响。灯塔加速器采用企业级 IEPL / IPLC 专线，骨干网络经由内网物理光纤过境，延迟抖动低于 3ms，全天候保障极致顺畅体验。",
+    highlights: [
+      "物理链路直通过境，跳过公网拥堵节点",
+      "单节点最高突发带宽达 2.5 Gbps",
+      "晚高峰实测丢包率趋近于 0%",
+      "多入口 BGP 智能就近接入调度",
+    ],
   },
   {
-    icon: Layers,
-    title: "Modular, plug-and-play sections",
-    desc: "Every section is a standalone Astro component with a consistent props interface. Reorder Hero, Features, Pricing, Steps, FAQ, FinalCTA without rewriting layout glue.",
-    points: ["15+ reusable section components", "Consistent props API (title, description, items)", "Mix, match, and reorder without conflicts", "Documented in /elements for quick reference"],
-    direction: "right",
-    visual: "blocks",
-  },
-  {
-    icon: FileText,
-    title: "Content with full MDX support",
-    desc: "Blog and changelog powered by Astro 6 Content Layer. Plain Markdown for prose, imported Astro components for interactive bits. No CMS, no plugin sprawl.",
-    points: ["Astro 6 Content Layer with glob loader", "Component imports inside MDX", "TOC + reading progress + share built-in", "Auto RSS feed at /rss.xml"],
-    direction: "left",
-    visual: "mdx",
+    icon: Cpu,
+    title: "现代 VLESS 极速传输协议",
+    subtitle: "更轻量、更纯粹、毫秒级首包响应",
+    desc: "相较于陈旧繁杂的传统协议，VLESS 作为新一代无状态轻量化架构，精简了不必要的多重握手损耗，使首包交互延迟下降 40% 以上。配合底层专线保障，带来丝滑顺手的网页加载与即时通讯体验。",
+    highlights: [
+      "无多余握手数据包，响应迅速无感",
+      "全节点统一部署，抗干扰能力极强",
+      "完美兼容主流全平台代理核心",
+      "低 CPU 占用，移动设备更省电",
+    ],
   },
   {
     icon: Sparkles,
-    title: "Subtle, purposeful animations",
-    desc: "Scroll reveals via AOS, orchestrated entrances via motion.js, and a staggered hero text component. Restraint over spectacle — every animation has a reason.",
-    points: ["AOS scroll reveal with `data-aos-once`", "motion.js for orchestrated timelines", "AnimatedText for hero stagger", "Honors prefers-reduced-motion"],
-    direction: "right",
-    visual: "motion",
+    title: "AI 原生工具 & 4K 流媒体深度支持",
+    subtitle: "原生纯净住宅/机房 IP 分配，告别频繁验证码",
+    desc: "ChatGPT、Claude、Midjourney 以及 Netflix、Disney+ 对访问者的 IP 质量与地理位置信誉度有着严格要求。灯塔加速器通过与全球一级 ISP 直接合作，部署大量原生纯净 IP，避免被云服务商标记黑名单，畅享 4K 极速秒开与高稳定性 AI 交互。",
+    highlights: [
+      "ChatGPT / Claude 对话毫秒即达，不弹人机验证",
+      "Netflix / Disney+ / YouTube 4K/8K 满速拖拽",
+      "TikTok 国际版出海营销与直播推流稳定不封控",
+      "定期轮转与动态监测，保持节点高信誉值",
+    ],
   },
   {
-    icon: Zap,
-    title: "Fast by default",
-    desc: "Astro ships zero JavaScript by default — interactive islands load only where needed. Tested on Vercel Edge and Cloudflare Pages, scoring Lighthouse 95+ across the board from a fresh install.",
-    points: ["Zero JS by default (Astro Islands)", "Automatic Sharp image optimization", "Static output, deployable anywhere", "Lighthouse 95+ on a fresh install"],
-    direction: "left",
-    visual: "lighthouse",
-  },
-  {
-    icon: Palette,
-    title: "Token-driven design system",
-    desc: "Colors, fonts, spacing, radii, and motion timing are all CSS custom properties documented in docs/DESIGN.md. Rebrand by editing one file — the rest of the site follows.",
-    points: ["~30 documented CSS tokens", "Tailwind v4 @theme integration", "Built-in dark mode with no flash", "/elements page as live reference"],
-    direction: "right",
-    visual: "palette",
+    icon: Laptop,
+    title: "不限设备并发，多端同时在线",
+    subtitle: "一个账号，覆盖您的所有个人设备或团队成员",
+    desc: "我们深知现代用户拥有手机、平板、轻薄本、台式机等多种终端。灯塔加速器取消了苛刻的设备数量限制，全系列套餐均支持多端同时在线，随时随地在任何设备上延续极速网络体验。",
+    highlights: [
+      "零门槛多端协同，家庭与团队免二次加费",
+      "支持 iOS、Android、Windows、macOS、Linux",
+      "路由器全局代理支持",
+      "会话独立并发，多端流量统计清晰明了",
+    ],
   },
 ];
 ---
 
 <Layout
-  title="特性概览 — Ace灯塔"
-  description="Everything you need to build a modern SaaS site. Carefully designed sections and production-ready components."
+  title="核心技术与产品优势 — 灯塔加速器官方品牌官网"
+  description="深度解析灯塔加速器的核心优势：全IEPL企业专线、VLESS新一代协议、全球原生节点、4K流媒体与ChatGPT原生解锁、不限设备同时连接。"
 >
   <section class="site-container my-12">
     <PageHeader
-      title="Everything you need to build a modern SaaS site"
-      description="Carefully designed sections, production-ready components, and a layout system that scales with your product."
+      title="卓越性能背后的技术架构"
+      description="从物理专线到协议栈实现，灯塔加速器致力于为用户提供全天候高可用的出海网络基础设施。"
     />
   </section>
 
-  <!-- Feature Detail Modules -->
-  {featureModules.map((mod) => (
-    <section class="py-16 md:py-24 site-container">
-      <div class={`flex flex-col ${mod.direction === 'right' ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-10 md:gap-16`}>
-        <!-- Text -->
-        <div class="flex-1 min-w-0" data-aos={mod.direction === 'right' ? 'fade-left-sm' : 'fade-right-sm'} data-aos-once="true">
-          <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-6">
-            <mod.icon class="w-6 h-6 text-primary" />
+  <!-- Deep Features Grid -->
+  <section class="site-container my-12 md:my-16 space-y-12">
+    {deepFeatures.map((feat, index) => (
+      <div
+        class="p-8 sm:p-10 rounded-2xl bg-bg-secondary dark:bg-bg-secondary-dark border border-primary/15 dark:border-neutral-700/80 shadow-sm"
+        data-aos="fade-up-xs"
+        data-aos-delay={index * 80}
+        data-aos-once="true"
+      >
+        <div class="flex flex-col md:flex-row md:items-start gap-6">
+          <div class="w-14 h-14 rounded-2xl bg-primary/10 dark:bg-primary/20 text-primary dark:text-primary-light flex items-center justify-center shrink-0">
+            <feat.icon size={28} />
           </div>
-          <h2 class="text-2xl md:text-3xl font-brand mb-4">{mod.title}</h2>
-          <p class="text-neutral-600 dark:text-neutral-300 leading-relaxed mb-6">{mod.desc}</p>
-          <ul class="space-y-3">
-            {mod.points.map((point) => (
-              <li class="flex items-start gap-2">
-                <Check class="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                <span class="text-sm text-neutral-600 dark:text-neutral-300">{point}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <!-- Visual -->
-        <div class="flex-1 min-w-0 w-full" data-aos={mod.direction === 'right' ? 'fade-right-sm' : 'fade-left-sm'} data-aos-delay="200" data-aos-once="true">
-          <div class="relative rounded-2xl bg-bg-secondary dark:bg-bg-secondary-dark border border-primary/10 dark:border-neutral-700 h-[280px] md:h-[340px] overflow-hidden p-6">
-
-            <!-- 1. Page wireframe -->
-            {mod.visual === "wireframe" && (
-              <div class="h-full flex flex-col gap-2.5">
-                <div class="h-5 rounded-md border border-dashed border-primary/30 flex items-center px-2 gap-1.5">
-                  <div class="w-2 h-2 rounded-full bg-primary/40"></div>
-                  <div class="flex-1"></div>
-                  <div class="w-6 h-1 rounded-full bg-primary/30"></div>
-                  <div class="w-6 h-1 rounded-full bg-primary/30"></div>
-                  <div class="w-6 h-1 rounded-full bg-primary/30"></div>
+          <div class="flex-1">
+            <div class="mb-3">
+              <span class="text-xs font-semibold text-primary dark:text-primary-light uppercase tracking-wider">
+                {feat.subtitle}
+              </span>
+              <h2 class="text-2xl sm:text-3xl font-brand font-bold text-neutral-800 dark:text-neutral-100 mt-1">
+                {feat.title}
+              </h2>
+            </div>
+            <p class="text-sm sm:text-base text-neutral-600 dark:text-neutral-300 leading-relaxed mb-6">
+              {feat.desc}
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-4 border-t border-dashed border-primary/15 dark:border-neutral-700">
+              {feat.highlights.map((point) => (
+                <div class="flex items-center gap-2 text-xs sm:text-sm text-neutral-700 dark:text-neutral-200">
+                  <CheckCircle2 size={16} class="text-emerald-500 shrink-0" />
+                  <span>{point}</span>
                 </div>
-                <div class="h-16 rounded-md border border-dashed border-primary/30 bg-primary/5 flex items-center justify-center">
-                  <div class="text-[9px] uppercase tracking-wider text-primary/60">Hero</div>
-                </div>
-                <div class="grid grid-cols-3 gap-2 flex-1">
-                  <div class="rounded-md border border-dashed border-primary/30 bg-primary/5"></div>
-                  <div class="rounded-md border border-dashed border-primary/30 bg-primary/5"></div>
-                  <div class="rounded-md border border-dashed border-primary/30 bg-primary/5"></div>
-                </div>
-                <div class="h-10 rounded-md border border-dashed border-primary/30 bg-accent/10"></div>
-              </div>
-            )}
-
-            <!-- 2. Modular blocks -->
-            {mod.visual === "blocks" && (
-              <div class="h-full relative flex items-center justify-center">
-                <div class="absolute top-4 left-4 w-28 h-20 rounded-xl border border-dashed border-primary/40 bg-primary/10 rotate-[-6deg] shadow-sm flex items-center justify-center">
-                  <span class="text-[10px] uppercase tracking-wider text-primary/70">Hero</span>
-                </div>
-                <div class="relative w-32 h-24 rounded-xl border border-dashed border-primary/50 bg-bg-secondary dark:bg-bg-secondary-dark shadow-md flex items-center justify-center z-10">
-                  <span class="text-[10px] uppercase tracking-wider text-primary">Features</span>
-                </div>
-                <div class="absolute bottom-4 right-4 w-28 h-20 rounded-xl border border-dashed border-accent/50 bg-accent/15 rotate-[8deg] shadow-sm flex items-center justify-center">
-                  <span class="text-[10px] uppercase tracking-wider text-amber-700/80 dark:text-amber-300/80">Pricing</span>
-                </div>
-                <div class="absolute top-12 right-10 w-20 h-14 rounded-xl border border-dashed border-primary/30 bg-bg-primary/40 dark:bg-neutral-900/40 rotate-[-4deg] shadow-sm flex items-center justify-center">
-                  <span class="text-[9px] uppercase tracking-wider text-primary/50">FAQ</span>
-                </div>
-              </div>
-            )}
-
-            <!-- 3. MDX code -->
-            {mod.visual === "mdx" && (
-              <div class="h-full font-mono text-[11px] leading-relaxed text-neutral-600 dark:text-neutral-300 overflow-hidden">
-                <div class="text-neutral-400">---</div>
-                <div><span class="text-primary">title</span>: <span class="text-emerald-600 dark:text-emerald-400">"Launching v1.2"</span></div>
-                <div><span class="text-primary">publishDate</span>: 2026-03-18</div>
-                <div><span class="text-primary">tags</span>: [<span class="text-emerald-600 dark:text-emerald-400">"Release"</span>]</div>
-                <div class="text-neutral-400">---</div>
-                <div class="mt-2"><span class="text-amber-600 dark:text-amber-400">## What's new</span></div>
-                <div class="mt-1">持续演进迭代，Ace灯塔</div>
-                <div>v1.2 ships today.</div>
-                <div class="mt-2 text-purple-600 dark:text-purple-400">&lt;Callout type="success"&gt;</div>
-                <div class="pl-4">Lighthouse 95+ across the board</div>
-                <div class="text-purple-600 dark:text-purple-400">&lt;/Callout&gt;</div>
-              </div>
-            )}
-
-            <!-- 4. Motion -->
-            {mod.visual === "motion" && (
-              <div class="h-full relative flex items-center justify-center">
-                <div class="absolute w-24 h-24 rounded-2xl border border-primary/20 bg-primary/5 translate-x-[-32px] translate-y-[-24px] opacity-30"></div>
-                <div class="absolute w-24 h-24 rounded-2xl border border-primary/30 bg-primary/10 translate-x-[-16px] translate-y-[-12px] opacity-60"></div>
-                <div class="absolute w-24 h-24 rounded-2xl border border-primary/50 bg-primary/20 shadow-md"></div>
-                <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-1.5">
-                  <Sparkles class="w-3 h-3 text-primary" />
-                  <span class="text-[10px] uppercase tracking-wider text-primary">Staggered entrance</span>
-                </div>
-              </div>
-            )}
-
-            <!-- 5. Lighthouse -->
-            {mod.visual === "lighthouse" && (
-              <div class="h-full flex flex-col">
-                <div class="grid grid-cols-4 gap-3 flex-1 items-center">
-                  {[
-                    { label: "Perf", value: 98, color: "text-emerald-500" },
-                    { label: "A11y", value: 90, color: "text-emerald-500" },
-                    { label: "Best", value: 100, color: "text-emerald-500" },
-                    { label: "SEO", value: 95, color: "text-emerald-500" },
-                  ].map((m) => (
-                    <div class="flex flex-col items-center gap-2">
-                      <div class="relative w-14 h-14 rounded-full border-2 border-emerald-500/30 bg-emerald-500/5 flex items-center justify-center">
-                        <span class={`text-base font-brand ${m.color}`}>{m.value}</span>
-                      </div>
-                      <span class="text-[10px] uppercase tracking-wider text-neutral-500 dark:text-neutral-400">{m.label}</span>
-                    </div>
-                  ))}
-                </div>
-                <div class="mt-4 flex items-center justify-center gap-1.5">
-                  <Zap class="w-3 h-3 text-primary" />
-                  <span class="text-[10px] uppercase tracking-wider text-primary">Lighthouse · Home page</span>
-                </div>
-              </div>
-            )}
-
-            <!-- 6. Palette -->
-            {mod.visual === "palette" && (
-              <div class="h-full flex flex-col gap-3">
-                <div class="flex gap-2">
-                  <div class="flex-1 rounded-lg" style="background: #2d6dc3; height: 56px;"></div>
-                  <div class="flex-1 rounded-lg" style="background: #0066ff; height: 56px;"></div>
-                  <div class="flex-1 rounded-lg" style="background: #8fb9ff; height: 56px;"></div>
-                  <div class="flex-1 rounded-lg" style="background: #fad13b; height: 56px;"></div>
-                  <div class="flex-1 rounded-lg" style="background: #faeb75; height: 56px;"></div>
-                </div>
-                <div class="flex-1 rounded-lg border border-primary/10 dark:border-neutral-700 bg-bg-primary/40 dark:bg-neutral-800/40 p-3 font-mono text-[10px] leading-snug">
-                  <div class="text-neutral-400">@theme &#123;</div>
-                  <div class="pl-3"><span class="text-primary">--color-primary</span>: <span class="text-amber-600 dark:text-amber-400">#2d6dc3</span>;</div>
-                  <div class="pl-3"><span class="text-primary">--color-accent</span>: <span class="text-amber-600 dark:text-amber-400">#fad13b</span>;</div>
-                  <div class="pl-3"><span class="text-primary">--font-brand</span>: Instrument Serif;</div>
-                  <div class="text-neutral-400">&#125;</div>
-                </div>
-              </div>
-            )}
-
+              ))}
+            </div>
           </div>
         </div>
       </div>
-    </section>
-  ))}
+    ))}
+  </section>
 
-  <div class="w-full border-b border-dashed border-neutral-200 dark:border-neutral-700 my-4 site-container"></div>
-
-  <!-- CTA -->
-  <section class="py-16 md:py-24 site-container" data-aos="fade-up-xs" data-aos-once="true">
-    <div class="max-w-2xl mx-auto text-center">
-      <h2 class="text-3xl md:text-4xl font-brand mb-4">See it in action</h2>
-      <p class="text-neutral-600 dark:text-neutral-300 mb-8 leading-relaxed">
-        Browse the live demo, then fork the repo when you're ready to make it yours.
+  <!-- CTA Strip -->
+  <section class="site-container my-16 text-center">
+    <div class="p-8 sm:p-12 rounded-2xl bg-bg-secondary dark:bg-bg-secondary-dark border border-primary/20">
+      <h3 class="text-2xl sm:text-3xl font-brand font-bold text-neutral-800 dark:text-neutral-100 mb-3">
+        体验企业级专线带来的流畅感
+      </h3>
+      <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-6 max-w-lg mx-auto">
+        自 2020 年起稳定运营，单节点最高 2.5Gbps，支持自研客户端与主流第三方工具一键导入。
       </p>
       <div class="flex flex-wrap justify-center gap-3">
-        <Button url="/" type="fill" className="text-lg px-8 py-3">
-          View Live Demo <ArrowRight size={18} />
+        <Button
+          url={REGISTER_URL}
+          target="_blank"
+          rel="nofollow noopener noreferrer"
+          type="fill"
+          className="px-8 py-3.5 font-semibold text-base"
+        >
+          <Sparkles size={16} /> 立即注册开通 <ArrowRight size={16} />
         </Button>
-        <Button url="/about" className="text-lg px-8 py-3">
-          了解关于灯塔
+        <Button url="/#pricing" className="px-8 py-3.5 font-semibold text-base">
+          查看套餐方案
         </Button>
       </div>
     </div>

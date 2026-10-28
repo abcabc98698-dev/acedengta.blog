@@ -2,80 +2,94 @@
 import Layout from "@/layouts/Layout.astro";
 import PageHeader from "@/components/elements/PageHeader.astro";
 import PricingSection from "@/components/sections/Pricing.astro";
-import AccordionItem from "@/components/ui/AccordionItem.astro";
+import FAQ from "@/components/sections/FAQ.astro";
 import Button from "@/components/ui/Button.astro";
-import { siteConfig } from "@/config/site";
-import { Check, X, ArrowRight } from "@lucide/astro";
+import { siteConfig, REGISTER_URL } from "@/config/site";
+import { Check, X, ArrowRight, ShieldCheck, Sparkles, HelpCircle } from "@lucide/astro";
 
 const comparisonFeatures = [
-  { name: "Projects", free: "1", pro: "Unlimited", enterprise: "Unlimited" },
-  { name: "Page templates", free: "Basic", pro: "Full", enterprise: "Full + Custom" },
-  { name: "Components", free: "Core", pro: "Full library", enterprise: "Full + Custom" },
-  { name: "Customization", free: "Limited", pro: "Full", enterprise: "Advanced" },
-  { name: "Animations", free: "Basic AOS", pro: "Full motion.js", enterprise: "Full + Custom" },
-  { name: "Support", free: "Community", pro: "Email (1 biz day)", enterprise: "Priority (same day)" },
-  { name: "Custom domain", free: false, pro: true, enterprise: true },
-  { name: "Team seats", free: "1", pro: "3", enterprise: "10+" },
-  { name: "SSO + audit log", free: false, pro: false, enterprise: true },
-  { name: "SLA", free: false, pro: false, enterprise: "99.9%" },
+  { name: "价格与结算周期", p1: "147元 (一次性买断)", p2: "99元 / 年 (折合8.25元/月)", p3: "25元 / 月 (年付折后20元)", p4: "680元 / 月 (企业定制)" },
+  { name: "流量规格", p1: "247 GB 永久不限期", p2: "69 GB / 月", p3: "168 GB / 月 (全节点×1)", p4: "500 GB / 月 (可扩容)" },
+  { name: "网络线路架构", p1: "原生高速骨干专线", p2: "原生稳定专线", p3: "全球 IPLC 纯商业专线", p4: "全 IPLC 独享物理带宽" },
+  { name: "单节点最高速率", p1: "2.5 Gbps", p2: "原生高速带宽", p3: "2.5 Gbps", p4: "2.5 Gbps 独立保障" },
+  { name: "设备连接限制", p1: "不限设备数量", p2: "不限设备数量", p3: "不限设备数量", p4: "不限设备数量" },
+  { name: "传输协议", p1: "VLESS 高效传输", p2: "VLESS 高效传输", p3: "VLESS 高效传输", p4: "VLESS / 按需定制" },
+  { name: "节点覆盖区域", p1: "港/台/日/新/美/欧 等60+节点", p2: "港/台/日/新/马/美/欧", p3: "港/台/日/新/美/欧 等核心枢纽", p4: "港/日/美/新 全球按需定制" },
+  { name: "4K 流媒体解锁", p1: "支持 (Netflix/Disney+)", p2: "支持 (Netflix/Disney+)", p3: "极致支持 (原生极速)", p4: "独享支持 (无风控风险)" },
+  { name: "AI 工具加速", p1: "支持 (ChatGPT/Claude)", p2: "支持 (ChatGPT/Claude)", p3: "极速支持 (低时延秒回)", p4: "专属独立 IP (零封号风险)" },
+  { name: "跨境电商 / TikTok直播", p1: "支持", p2: "基础支持", p3: "流畅支持", p4: "企业级高可靠支持" },
+  { name: "专属原生独立 IP", p1: "共享原生 IP", p2: "共享原生 IP", p3: "共享纯净原生 IP", p4: "独享纯净专属原生 IP" },
+  { name: "运维服务支持", p1: "工单 / 客户群", p2: "工单 / 客户群", p3: "7×24小时专业技术支持", p4: "7×24小时企业VIP专属支持" },
 ];
 
-const faqItems = [
-  { question: "Is there a free trial on Pro?", answer: "Yes — Pro includes a 7-day free trial. No credit card required to start; we'll only ask for billing details when the trial ends." },
-  { question: "What's your refund policy?", answer: "14-day money-back guarantee on all paid plans, no questions asked. Email contact@acedengta.blog within 14 days of the charge and we'll process the refund within 2 business days." },
-  { question: "Can I upgrade or downgrade later?", answer: "Anytime. Upgrades take effect immediately and we prorate the difference. Downgrades take effect at the end of the current billing period, so you keep paid features until then." },
-  { question: "How does team billing work?", answer: "Pro includes 3 seats and Enterprise starts at 10 seats. Additional seats are $9/seat/month on Pro and $19/seat/month on Enterprise, billed on the same cycle as your main subscription." },
+const pricingFaq = [
+  {
+    question: "“8.25 元/月”属于哪种套餐？",
+    answer: "8.25 元/月是轻量版套餐年付 99 元计算得出的平均月费，非按月单次购买价格。年付方案适合查阅学术资料、日常办公沟通与偶尔观看流媒体的轻度用户。"
+  },
+  {
+    question: "“致敬斯诺克147”套餐适合哪些人群？",
+    answer: "适合用量不频繁、讨厌每月记账续费的用户。一次性付费 147 元即可获得 247GB 永久流量，没有月付清零压力，用完为止，支持作为长期主力或备用通道。"
+  },
+  {
+    question: "极速版的多周期折扣是如何计算的？",
+    answer: "极速版（原价 25元/月）提供阶梯优惠：半年付 9 折、年付 8 折（年付平均仅需 20元/月）、两年付 75 折、三年付 7 折，购买周期越长单月成本越划算。"
+  },
+  {
+    question: "定制版包含哪些专属企业服务？",
+    answer: "定制版（680元/月）专为对 IP 纯净度和稳定性有苛刻要求的出海电商、海外社媒投放团队与 TikTok 直播工作室设计。专属分配独立原生 IP 与独立保障带宽，不受其他邻居网络波动影响，并由工程师一对一确认线路地区和对接调试。"
+  },
+  {
+    question: "付款后如何开通使用？",
+    answer: "付款完成后系统在 10 秒内自动激活服务。您只需在用户中心一键复制订阅链接导入至自研客户端或 Clash、Shadowrocket 等软件即可使用。"
+  },
 ];
 ---
 
 <Layout
-  title="方案定价 — Ace灯塔"
-  description="Simple, transparent pricing. Choose a plan that fits your stage."
+  title="套餐方案与价格详情 — 灯塔加速器官方品牌官网"
+  description="灯塔加速器全系套餐方案展示。包含致敬斯诺克147永久套餐、99元年付轻量版、全球IPLC极速版与企业定制版。不限设备数量，原生稳定专线。"
 >
   <section class="site-container my-12">
     <PageHeader
-      title="Simple, transparent pricing"
-      description="Choose a plan that fits your stage. Upgrade anytime as you grow."
+      title="透明、稳定、高性价比的专线方案"
+      description="无隐藏套路，全系标配 VLESS 协议与原生高速专线，不限设备数量连接。"
     />
-    <p class="text-center text-xs text-neutral-400 dark:text-neutral-500 mt-6 italic">
-      参考定价体系展示 — Ace灯塔支持随业务发展灵活定制扩展方案。
-    </p>
   </section>
 
+  <!-- 4-Card Pricing Section -->
   <PricingSection showHeader={false} />
 
-  <div class="w-full border-b border-dashed border-neutral-200 dark:border-neutral-700 my-8 site-container"></div>
+  <!-- Detailed Feature Comparison Table -->
+  <section class="site-container my-16 md:my-24">
+    <div class="text-center max-w-3xl mx-auto mb-10">
+      <h2 class="text-2xl sm:text-3xl font-brand font-bold text-neutral-800 dark:text-neutral-100">
+        套餐详细规格横向对比
+      </h2>
+      <p class="mt-2 text-sm text-neutral-500 dark:text-neutral-400">
+        一览四大方案的核心差异，挑选最契合您业务阶段的配置。
+      </p>
+    </div>
 
-  <!-- Feature Comparison -->
-  <section class="site-container py-16 md:py-24" data-aos="fade-up-xs" data-aos-once="true">
-    <h2 class="text-3xl font-brand text-center mb-8">Compare plans</h2>
-    <div class="max-w-4xl mx-auto overflow-x-auto">
-      <table class="w-full">
+    <div class="overflow-x-auto rounded-2xl border border-primary/15 dark:border-neutral-700 bg-bg-secondary/60 dark:bg-bg-secondary-dark/60 shadow-sm">
+      <table class="w-full text-left border-collapse text-xs sm:text-sm">
         <thead>
-          <tr class="border-b border-dashed border-neutral-200 dark:border-neutral-700">
-            <th class="text-left py-4 pr-8 text-sm font-medium text-neutral-500">Feature</th>
-            <th class="text-center py-4 px-4 text-sm font-medium text-neutral-500">Free</th>
-            <th class="text-center py-4 px-4 text-sm font-medium text-primary">Pro</th>
-            <th class="text-center py-4 px-4 text-sm font-medium text-neutral-500">Enterprise</th>
+          <tr class="border-b border-primary/15 dark:border-neutral-700 bg-primary/5 dark:bg-primary/10">
+            <th class="p-4 font-bold text-neutral-800 dark:text-neutral-200 min-w-[140px]">功能与规格对比</th>
+            <th class="p-4 font-bold text-neutral-800 dark:text-neutral-200 min-w-[130px]">致敬斯诺克147</th>
+            <th class="p-4 font-bold text-neutral-800 dark:text-neutral-200 min-w-[130px]">轻量版</th>
+            <th class="p-4 font-bold text-primary dark:text-primary-light min-w-[130px]">极速版 (主力)</th>
+            <th class="p-4 font-bold text-neutral-800 dark:text-neutral-200 min-w-[130px]">定制版</th>
           </tr>
         </thead>
-        <tbody>
-          {comparisonFeatures.map((feature) => (
-            <tr class="border-b border-dashed border-neutral-100 dark:border-neutral-800">
-              <td class="py-4 pr-8 text-sm text-neutral-700 dark:text-neutral-300">{feature.name}</td>
-              {[feature.free, feature.pro, feature.enterprise].map((val) => (
-                <td class="text-center py-4 px-4">
-                  {typeof val === 'boolean' ? (
-                    val ? (
-                      <Check class="w-4 h-4 text-primary mx-auto" />
-                    ) : (
-                      <X class="w-4 h-4 text-neutral-300 dark:text-neutral-600 mx-auto" />
-                    )
-                  ) : (
-                    <span class="text-sm text-neutral-600 dark:text-neutral-300">{val}</span>
-                  )}
-                </td>
-              ))}
+        <tbody class="divide-y divide-primary/10 dark:divide-neutral-700/60 text-neutral-600 dark:text-neutral-300">
+          {comparisonFeatures.map((row) => (
+            <tr class="hover:bg-primary/5 transition-colors">
+              <td class="p-4 font-semibold text-neutral-800 dark:text-neutral-100">{row.name}</td>
+              <td class="p-4">{row.p1}</td>
+              <td class="p-4">{row.p2}</td>
+              <td class="p-4 font-medium text-primary dark:text-primary-light">{row.p3}</td>
+              <td class="p-4">{row.p4}</td>
             </tr>
           ))}
         </tbody>
@@ -83,33 +97,32 @@ const faqItems = [
     </div>
   </section>
 
-  <div class="w-full border-b border-dashed border-neutral-200 dark:border-neutral-700 my-8 site-container"></div>
-
-  <!-- Pricing FAQ -->
-  <section class="py-16 md:py-24 site-container">
-    <h2 class="text-3xl font-brand text-center mb-8">Pricing FAQ</h2>
-    <div class="max-w-2xl mx-auto" data-aos="fade-up-xs" data-aos-once="true">
-      {faqItems.map((item, index) => (
-        <AccordionItem question={item.question} answer={item.answer} index={index} />
-      ))}
-    </div>
+  <!-- FAQ Section -->
+  <section class="site-container my-16">
+    <FAQ
+      title="购买与套餐相关常见问题"
+      items={pricingFaq}
+    />
   </section>
 
-  <!-- CTA -->
-  <section class="py-16 md:py-24 site-container" data-aos="fade-up-xs" data-aos-once="true">
-    <div class="max-w-2xl mx-auto text-center">
-      <h2 class="text-3xl md:text-4xl font-brand mb-4">Not sure which plan?</h2>
-      <p class="text-neutral-600 dark:text-neutral-300 mb-8 leading-relaxed">
-        Start on Free, upgrade when you outgrow it. Most teams switch to Pro within their first month.
+  <!-- CTA Box -->
+  <section class="site-container my-16 text-center">
+    <div class="p-8 sm:p-12 rounded-2xl bg-bg-secondary dark:bg-bg-secondary-dark border border-primary/20">
+      <h3 class="text-2xl sm:text-3xl font-brand font-bold text-neutral-800 dark:text-neutral-100 mb-3">
+        准备好开启极致网络体验了吗？
+      </h3>
+      <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-6 max-w-lg mx-auto">
+        进入官方统一注册通道，挑选适合您的套餐，几分钟即可畅游全球。
       </p>
-      <div class="flex flex-wrap justify-center gap-3">
-        <Button url={siteConfig.social.github} type="fill" className="text-lg px-8 py-3">
-          Start free <ArrowRight size={18} />
-        </Button>
-        <Button url="/contact" className="text-lg px-8 py-3">
-          Talk to sales
-        </Button>
-      </div>
+      <Button
+        url={REGISTER_URL}
+        target="_blank"
+        rel="nofollow noopener noreferrer"
+        type="fill"
+        className="px-8 py-3.5 font-semibold text-base mx-auto"
+      >
+        <Sparkles size={16} /> 前往官方注册开通 <ArrowRight size={16} />
+      </Button>
     </div>
   </section>
 </Layout>

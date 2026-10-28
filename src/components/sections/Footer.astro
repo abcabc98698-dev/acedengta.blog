@@ -1,55 +1,107 @@
 ---
 import Logo from "@/components/ui/Logo.astro";
 import ToTop from "@/components/widgets/ToTop.astro";
-import { siteConfig, socialLinks } from "@/config/site.js";
+import { siteConfig, REGISTER_URL, socialLinks } from "@/config/site.js";
+import { ShieldCheck, Zap, Lock, Sparkles, Server } from "@lucide/astro";
 
 const currentYear = new Date().getFullYear();
 
 const footerLinks = {
   product: [
-    { name: "核心特性", url: "/features" },
-    { name: "方案定价", url: "/pricing" },
-    { name: "更新日志", url: "/changelog" },
-    { name: "用户登录", url: "/sign-in" },
-    { name: "即刻注册", url: "/sign-up" },
+    { name: "致敬斯诺克147永久版", url: "/#pricing" },
+    { name: "轻量入门版 (99元/年)", url: "/#pricing" },
+    { name: "全球IPLC极速版", url: "/#pricing" },
+    { name: "独享原生IP定制版", url: "/#pricing" },
+    { name: "进入官网注册中心", url: REGISTER_URL, isExternal: true },
   ],
-  resources: [
-    { name: "深度博客", url: "/blog" },
-    { name: "设计规范", url: "/elements" },
-    { name: "RSS 订阅", url: "/rss.xml" },
-    { name: "站点地图", url: "/sitemap-index.xml" },
-    { name: "开源仓库", url: siteConfig.social.github },
+  features: [
+    { name: "IEPL企业级内网专线", url: "/features" },
+    { name: "现代VLESS极速协议", url: "/features" },
+    { name: "全球原生稳定节点", url: "/features" },
+    { name: "AI 与 4K 流媒体解锁", url: "/features" },
+    { name: "全球节点实时监控", url: "/status" },
+  ],
+  guides: [
+    { name: "Clash 全平台配置教程", url: "/blog" },
+    { name: "Shadowrocket (小火箭) 导入", url: "/blog" },
+    { name: "VLESS 专线架构深度解析", url: "/blog" },
+    { name: "ChatGPT & 流媒体解锁技巧", url: "/blog" },
+    { name: "常见问题解答 (FAQ)", url: "/#faq" },
   ],
   company: [
-    { name: "关于灯塔", url: "/about" },
-    { name: "联系我们", url: "/contact" },
-  ],
-  legal: [
-    { name: "开源许可 (MIT)", url: "/about" },
+    { name: "关于品牌", url: "/about" },
+    { name: "节点实时状态", url: "/status" },
+    { name: "联系客服支持", url: "/contact" },
+    { name: "服务条款", url: "/terms" },
+    { name: "隐私政策", url: "/privacy" },
   ],
 };
 
-const version = "v1.0.0";
+const tags = [
+  "2020年运营",
+  "IEPL专线",
+  "VLESS",
+  "年付低价",
+  "AI工具",
+  "流媒体",
+  "自研客户端",
+  "单节点最高2.5Gbps",
+  "不限设备",
+];
 ---
 
-<section class="text-gray-700 border-t mt-20 md:mt-48 border-dashed border-primary/15 dark:border-primary-dark/15 border-[.75px]">
+<section class="text-gray-700 border-t mt-20 md:mt-32 border-dashed border-primary/15 dark:border-primary-dark/15 border-[.75px]">
   <div class="container mx-auto px-7 max-w-7xl py-12 md:py-16">
-    <!-- Top: Logo + Description -->
-    <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-8 mb-12">
-      <div class="max-w-sm">
+    <!-- Top: Logo + Brand Info + Trust Badges -->
+    <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-8 mb-12">
+      <div class="max-w-md">
         <Logo />
-        <p class="mt-4 text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed">
-          专注于数字化技术实践、敏捷工程化工具、现代前端架构与独立产品商业化的探索与沉淀。
+        <p class="mt-4 text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed">
+          灯塔加速器自 2020 年起稳定运营，专注于提供高可用 IEPL 企业内网专线与 VLESS 协议加速服务。覆盖港台日新美等全球原生高速节点，单节点最高 2.5Gbps，支持主流 4K 流媒体与 ChatGPT 原生解锁。
         </p>
+
+        <!-- Official Authorization Badge -->
+        <div class="mt-5 inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-700 dark:text-emerald-400 text-xs font-medium">
+          <ShieldCheck size={16} />
+          <span>灯塔加速器官方授权品牌服务门户</span>
+        </div>
+
+        <!-- Tags -->
+        <div class="mt-4 flex flex-wrap gap-1.5">
+          {tags.map((tag) => (
+            <span class="text-[11px] px-2 py-0.5 rounded-md bg-primary/5 dark:bg-primary/10 border border-primary/15 text-neutral-600 dark:text-neutral-300">
+              {tag}
+            </span>
+          ))}
+        </div>
       </div>
 
       <!-- Four columns -->
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-8 md:gap-12">
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-8 md:gap-10">
         <!-- Product -->
         <div>
-          <h4 class="text-sm font-semibold text-neutral-800 dark:text-neutral-200 mb-4">产品</h4>
-          <ul class="space-y-3">
+          <h4 class="text-sm font-semibold text-neutral-800 dark:text-neutral-200 mb-4">套餐方案</h4>
+          <ul class="space-y-2.5">
             {footerLinks.product.map((link) => (
+              <li>
+                <a
+                  href={link.url}
+                  target={link.isExternal ? "_blank" : "_self"}
+                  rel={link.isExternal ? "nofollow noopener noreferrer" : undefined}
+                  class="text-sm text-neutral-500 dark:text-neutral-400 hover:text-primary dark:hover:text-primary-light transition-colors duration-200"
+                >
+                  {link.name}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <!-- Features -->
+        <div>
+          <h4 class="text-sm font-semibold text-neutral-800 dark:text-neutral-200 mb-4">专线特性</h4>
+          <ul class="space-y-2.5">
+            {footerLinks.features.map((link) => (
               <li>
                 <a href={link.url} class="text-sm text-neutral-500 dark:text-neutral-400 hover:text-primary dark:hover:text-primary-light transition-colors duration-200">
                   {link.name}
@@ -59,11 +111,11 @@ const version = "v1.0.0";
           </ul>
         </div>
 
-        <!-- Resources -->
+        <!-- Guides -->
         <div>
-          <h4 class="text-sm font-semibold text-neutral-800 dark:text-neutral-200 mb-4">资源</h4>
-          <ul class="space-y-3">
-            {footerLinks.resources.map((link) => (
+          <h4 class="text-sm font-semibold text-neutral-800 dark:text-neutral-200 mb-4">配置教程</h4>
+          <ul class="space-y-2.5">
+            {footerLinks.guides.map((link) => (
               <li>
                 <a href={link.url} class="text-sm text-neutral-500 dark:text-neutral-400 hover:text-primary dark:hover:text-primary-light transition-colors duration-200">
                   {link.name}
@@ -75,23 +127,9 @@ const version = "v1.0.0";
 
         <!-- Company -->
         <div>
-          <h4 class="text-sm font-semibold text-neutral-800 dark:text-neutral-200 mb-4">关于</h4>
-          <ul class="space-y-3">
+          <h4 class="text-sm font-semibold text-neutral-800 dark:text-neutral-200 mb-4">品牌与条款</h4>
+          <ul class="space-y-2.5">
             {footerLinks.company.map((link) => (
-              <li>
-                <a href={link.url} class="text-sm text-neutral-500 dark:text-neutral-400 hover:text-primary dark:hover:text-primary-light transition-colors duration-200">
-                  {link.name}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <!-- Legal -->
-        <div>
-          <h4 class="text-sm font-semibold text-neutral-800 dark:text-neutral-200 mb-4">条款</h4>
-          <ul class="space-y-3">
-            {footerLinks.legal.map((link) => (
               <li>
                 <a href={link.url} class="text-sm text-neutral-500 dark:text-neutral-400 hover:text-primary dark:hover:text-primary-light transition-colors duration-200">
                   {link.name}
@@ -103,27 +141,32 @@ const version = "v1.0.0";
       </div>
     </div>
 
+    <!-- Notice Box -->
+    <div class="mb-8 p-3.5 rounded-xl border border-dashed border-primary/20 bg-primary/5 text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
+      <span class="font-semibold text-primary dark:text-primary-light">使用须知：</span>
+      “8.25 元/月”属于轻量版年付套餐（99元/年）折算后的平均月成本，并非普通按月结算价格。全系列套餐均享受不限设备接入与原生稳定线路保障。本站为灯塔加速器官方授权品牌官网，全网统一正版注册通道。
+    </div>
+
     <!-- Bottom bar -->
     <div class="border-t border-dashed border-primary/10 dark:border-primary-dark/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-      <p class="text-sm text-neutral-400 dark:text-neutral-500">
-        © {currentYear}
-        <a href={siteConfig.url || "/"} class="hover:text-primary dark:hover:text-primary-light transition-colors">{siteConfig.author || "Ace灯塔"}</a>.
-        All rights reserved.
+      <p class="text-sm text-neutral-400 dark:text-neutral-500 text-center sm:text-left">
+        © 2020-{currentYear} <a href="/" class="hover:text-primary dark:hover:text-primary-light transition-colors">{siteConfig.title}</a>. 官方正版授权 · 保留所有权利。
       </p>
 
       <div class="flex items-center gap-4">
         <span class="inline-flex items-center gap-2 text-xs text-neutral-400 dark:text-neutral-500">
-          <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full border border-dashed border-primary/30 text-primary/80">
-            <span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
-            {version}
+          <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full border border-dashed border-emerald-500/30 text-emerald-600 dark:text-emerald-400">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            全节点稳定运行
           </span>
-          <span>Ace灯塔系统</span>
+          <span class="hidden md:inline">IEPL 专线·最高 2.5Gbps</span>
         </span>
         <span class="inline-flex justify-center space-x-4">
           {socialLinks.map((social) => (
             <a
               href={social.url}
               target={social.url.startsWith("http") ? "_blank" : "_self"}
+              rel={social.rel}
               class="footer-social-icon-link text-neutral-400 dark:text-neutral-500 hover:text-primary dark:hover:text-primary-light transition-colors duration-200"
               title={social.name}
             >
@@ -156,17 +199,5 @@ const version = "v1.0.0";
     width: 18px;
     height: 18px;
     fill: currentColor;
-  }
-
-  .footer-social-icon-link:hover .ic-twitter {
-    color: #1DA1F2;
-  }
-
-  .footer-social-icon-link:hover .ic-github {
-    color: #333;
-  }
-
-  .footer-social-icon-link:hover .ic-rss {
-    color: #F26522;
   }
 </style>

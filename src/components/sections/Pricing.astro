@@ -1,9 +1,8 @@
 ---
-import PricingToggle from "@/components/ui/PricingToggle.astro";
 import Button from "@/components/ui/Button.astro";
 import SectionHeader from "@/components/elements/SectionHeader.astro";
-import { siteConfig } from "@/config/site";
-import { Check, X, ArrowRight, Sparkles } from "@lucide/astro";
+import { REGISTER_URL } from "@/config/site";
+import { Check, ArrowRight, Sparkles, Flame, Shield, Infinity, Zap, Globe, Cpu } from "@lucide/astro";
 
 interface Props {
   title?: string;
@@ -12,341 +11,303 @@ interface Props {
 }
 
 const {
-  title = "Simple, transparent pricing",
-  description = "Choose a plan that fits your stage. Upgrade anytime as you grow.",
+  title = "灵活且透明的加速套餐方案",
+  description = "全系标配原生稳定专线节点，不限制设备接入数量。按需选择最贴合您业务与日常场景的方案。",
   showHeader = true,
 } = Astro.props;
 
 const plans = [
   {
-    name: "Free",
-    monthlyPrice: "$0",
-    yearlyPrice: "$0",
-    monthlyDescription: "For makers exploring a new idea on the side.",
-    yearlyDescription: "Stay free forever — annual billing won't cost you a cent.",
-    monthlySuffix: "/ month",
-    yearlySuffix: "/ month, billed yearly",
-    features: [
-      { text: "1 active project", included: true },
-      { text: "Core component library", included: true },
-      { text: "MDX content support", included: true },
-      { text: "Self-host only", included: true },
-      { text: "Community support", included: true },
-      { text: "Email support", included: false },
+    id: "snooker-147",
+    name: "致敬斯诺克147",
+    subName: "永久传世版",
+    badge: "一次性买断 · 永久不过期",
+    badgeVariant: "accent",
+    price: "147",
+    period: "元 / 一次性永久",
+    priceNote: "一次性付费，247GB 高速流量永不清零",
+    traffic: "247 GB",
+    trafficUnit: "永久流量（用完为止，永不过期）",
+    description: "经典致敬款。告别月付续费焦虑，随时随地可用，适合日常办公聊天与备用。",
+    speed: "单节点最高 2.5Gbps",
+    devices: "不限设备数量同时在线",
+    lines: "原生稳定节点 · VLESS",
+    nodesSummary: "香港×20、台湾×5、日本×10、新加坡×10、美国×10、马来西亚×2、英国、法国、德国、土耳其、泰国、巴西等",
+    suitableFor: "办公、邮件、资料查阅、社交聊天、轻度高清视频",
+    unlocks: [
+      "跨境电商平台合规访问",
+      "TikTok 直播与社媒运营",
+      "社媒广告投放与多渠道推广",
+      "远程办公 / 内网访问与高要求业务",
+      "主流 4K 流媒体与 ChatGPT 原生支持",
     ],
-    cta: "Get started",
+    features: [
+      { text: "247GB 永久高速流量，无过期限制", highlight: true },
+      { text: "原生稳定节点，单节点最高 2.5Gbps", highlight: false },
+      { text: "全球 60+ 优质节点集群覆盖", highlight: false },
+      { text: "不限制客户端同时连接数量", highlight: true },
+      { text: "支持自研客户端及 Clash/小火箭导入", highlight: false },
+      { text: "一次性买断，终身无续费压力", highlight: true },
+    ],
     popular: false,
+    ctaText: "立即购买永久套餐",
   },
   {
-    name: "Pro",
-    monthlyPrice: "$19",
-    yearlyPrice: "$15",
-    monthlyDescription: "For indie makers shipping their first real product.",
-    yearlyDescription: "Save 20% — best for makers committing to the long haul.",
-    monthlySuffix: "/ month",
-    yearlySuffix: "/ month, billed yearly",
-    features: [
-      { text: "Unlimited projects", included: true },
-      { text: "Full component library", included: true },
-      { text: "Advanced layout system", included: true },
-      { text: "Custom domains", included: true },
-      { text: "Built-in animations", included: true },
-      { text: "Email support (1 biz day)", included: true },
-      { text: "Quarterly office hours", included: true },
+    id: "lightweight",
+    name: "轻量版",
+    subName: "入门首选",
+    badge: "折合仅 8.25 元/月",
+    badgeVariant: "neutral",
+    price: "99",
+    period: "元 / 年付",
+    priceNote: "平均仅 8.25 元/月（年付折算）",
+    traffic: "69 GB",
+    trafficUnit: "/ 月（每月重置）",
+    description: "专为轻量需求与新手打造，以极低门槛享受稳定高速的专线网络体验。",
+    speed: "原生稳定带宽",
+    devices: "不限设备数量同时在线",
+    lines: "原生稳定专线 · VLESS",
+    nodesSummary: "港 / 台 / 日 / 新 / 马 / 美 / 德 / 法 / 英 / 土 / 越 全球覆盖",
+    suitableFor: "日常办公、学术检索、邮件查阅、IM 聊天、轻度流媒体",
+    unlocks: [
+      "Netflix / Disney+ / YouTube 4K",
+      "ChatGPT / Claude 原生加速",
+      "TikTok 国际版与海外社交",
+      "GitHub 与海外开发者生态",
     ],
-    cta: "Start free trial",
+    features: [
+      { text: "每月 69GB 高速专线流量", highlight: false },
+      { text: "年付仅需 99 元，折合 8.25 元/月", highlight: true },
+      { text: "港/台/日/新/马/美/欧等主流节点", highlight: false },
+      { text: "不限制设备登录数量", highlight: true },
+      { text: "主流 AI 工具与流媒体原生解锁", highlight: false },
+      { text: "支持全平台一键导入订阅", highlight: false },
+    ],
+    popular: false,
+    ctaText: "选购轻量入门版",
+  },
+  {
+    id: "speed-iplc",
+    name: "极速版",
+    subName: "旗舰专线主力",
+    badge: "🔥 全球IPLC · 晚高峰抗卡顿",
+    badgeVariant: "primary",
+    price: "25",
+    period: "元 / 月",
+    priceNote: "半年付9折 / 年付8折 / 两年75折 / 三年7折",
+    traffic: "168 GB",
+    trafficUnit: "/ 月（全节点 ×1 倍率）",
+    description: "旗舰主力推荐！全链路全球 IPLC 专线传输，超低延迟与无感抖动，晚高峰从不降速。",
+    speed: "单节点最高 2.5Gbps",
+    devices: "不限设备数量同时在线",
+    lines: "全球 IPLC 商业内网专线 · VLESS",
+    nodesSummary: "港 / 台 / 日 / 新 / 马 / 美 / 德 / 法 / 英 / 土 / 越 等核心枢纽",
+    suitableFor: "高码率 4K/8K 视频、重度 AI 交互、出海电商、游戏加速与高效生产力",
+    unlocks: [
+      "Netflix / Disney+ / HBO 4K 原生解锁",
+      "ChatGPT / Claude 毫秒级即时响应",
+      "TikTok 国际版高清直播与电商管理",
+      "全球游戏联机超低时延优化",
+      "7×24 小时专业运维监控保障",
+    ],
+    features: [
+      { text: "全球 IPLC 纯专线传输，晚高峰稳定如初", highlight: true },
+      { text: "每月 168GB（全节点 ×1 真实倍率）", highlight: true },
+      { text: "单节点最高 2.5Gbps 极致带宽", highlight: false },
+      { text: "不限制设备数，支持全家/团队共享", highlight: true },
+      { text: "年付享 8 折优惠（低至 20元/月）", highlight: true },
+      { text: "7×24 小时线路状态监控与自动容灾", highlight: false },
+    ],
     popular: true,
+    ctaText: "立即开通极速版",
   },
   {
-    name: "Enterprise",
-    monthlyPrice: "$49",
-    yearlyPrice: "$39",
-    monthlyDescription: "For teams scaling beyond a single founder.",
-    yearlyDescription: "Save 20% on annual — plus a dedicated onboarding session.",
-    monthlySuffix: "/ month",
-    yearlySuffix: "/ month, billed yearly",
-    features: [
-      { text: "Everything in Pro", included: true },
-      { text: "Team collaboration (10+ seats)", included: true },
-      { text: "SSO + audit log", included: true },
-      { text: "Custom integrations", included: true },
-      { text: "Priority support (same day)", included: true },
-      { text: "99.9% SLA", included: true },
+    id: "custom-enterprise",
+    name: "定制版",
+    subName: "企业与高阶出海",
+    badge: "独享原生IP · 独立专属带宽",
+    badgeVariant: "accent",
+    price: "680",
+    period: "元 / 月",
+    priceNote: "按需单独部署 · 客服一对一线下确认",
+    traffic: "500 GB",
+    trafficUnit: "/ 月（按需可扩容）",
+    description: "专为跨境出海企业、专业 TikTok 直播矩阵、社媒投放机构定制的专属隔离网络架构。",
+    speed: "单节点最高 2.5Gbps 独立带宽",
+    devices: "不限客户端数量，多端同时在线无门槛",
+    lines: "独立专属部署 · 全 IPLC 专线",
+    nodesSummary: "香港 / 日本 / 美国 / 新加坡等全球节点与地区均可按需定制配置",
+    suitableFor: "跨境电商多店铺防关联、TikTok 直播矩阵、企业海外内网直连、社媒批量投放推广",
+    unlocks: [
+      "独享纯净原生 IP，规避风控与连带封禁",
+      "物理级独立带宽隔离，不受邻居波动干扰",
+      "超低时延高可用架构，满足 7×24 长时推流",
+      "专属 VIP 客服一对一专属配置与维护",
     ],
-    cta: "Contact sales",
+    features: [
+      { text: "专属分配独享纯净原生 IP", highlight: true },
+      { text: "全 IPLC 专线接入，高可用容灾架构", highlight: true },
+      { text: "每月 500GB 独立保障带宽（可按需扩充）", highlight: false },
+      { text: "不限客户端同时在线，零门槛多端协同", highlight: true },
+      { text: "线路地区按业务场景量身开通部署", highlight: false },
+      { text: "7×24 小时企业级 VIP 优先技术支撑", highlight: true },
+    ],
     popular: false,
+    ctaText: "联系客服定制开通",
   },
 ];
 ---
 
-<section class="pricing-section">
+<section id="pricing" class="pricing-section py-12 md:py-20 site-container">
   {showHeader && (
-    <div class="site-container pt-16 md:pt-20" data-aos="fade-up-xs" data-aos-once="true">
-      <SectionHeader title={title} description={description} />
+    <div class="text-center max-w-3xl mx-auto mb-12 md:mb-16" data-aos="fade-up-xs" data-aos-once="true">
+      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-medium mb-3">
+        <Sparkles size={14} />
+        <span>官方透明定价 · 拒绝套路</span>
+      </div>
+      <h2 class="text-3xl md:text-5xl font-brand text-neutral-800 dark:text-neutral-100 tracking-tight">
+        {title}
+      </h2>
+      <p class="mt-4 text-base text-neutral-600 dark:text-neutral-300 leading-relaxed">
+        {description}
+      </p>
     </div>
   )}
 
-  <!-- Billing Toggle -->
-  <div class="site-container mb-12" data-aos="fade-up-xs" data-aos-once="true" data-aos-delay="300" >
-    <PricingToggle />
-  </div>
-
-  <!-- Pricing Cards -->
-  <div class="site-container pb-16">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-      {plans.map((plan, i) => (
-        <div
-          class={`relative p-6 md:p-8 rounded-2xl border transition-all duration-300 ${
-            plan.popular
-              ? 'border-primary shadow-lg scale-[1.02] bg-bg-secondary dark:bg-bg-secondary-dark'
-              : 'border-primary/10 dark:border-neutral-700 bg-bg-secondary dark:bg-bg-secondary-dark'
-          }`}
-          data-aos="fade-up-sm"
-          data-aos-delay={i * 100}
-          data-aos-once="true"
-        >
+  <!-- 4-Card Grid -->
+  <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 lg:gap-7 items-stretch">
+    {plans.map((plan, index) => (
+      <div
+        class:list={[
+          "relative flex flex-col justify-between rounded-2xl p-6 sm:p-7 transition-all duration-300",
+          plan.popular
+            ? "bg-bg-secondary dark:bg-bg-secondary-dark border-2 border-primary shadow-[0_16px_40px_rgba(45,109,195,0.18)] dark:shadow-[0_16px_40px_rgba(0,0,0,0.35)] -translate-y-1.5"
+            : "bg-bg-secondary/70 dark:bg-bg-secondary-dark/70 border border-primary/15 dark:border-neutral-700/80 hover:border-primary/40 hover:shadow-lg"
+        ]}
+        data-aos="fade-up-sm"
+        data-aos-delay={index * 90}
+        data-aos-once="true"
+      >
+        <!-- Top Badge -->
+        <div class="flex items-center justify-between gap-2 mb-4">
+          <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary-light border border-primary/20">
+            {plan.badge}
+          </span>
           {plan.popular && (
-            <div class="popular-badge absolute -top-3.5 left-1/2 -translate-x-1/2 z-10">
-              <span class="popular-badge__pill">
-                <Sparkles class="w-3.5 h-3.5" stroke-width={2.25} />
-                <span class="popular-badge__label font-brand">Most Popular</span>
-              </span>
-            </div>
-          )}
-
-          <h3 class="text-xl font-semibold text-neutral-800 dark:text-neutral-100 mb-1">{plan.name}</h3>
-          <p
-            class="plan-description text-sm text-neutral-500 dark:text-neutral-400 mb-4"
-            data-monthly={plan.monthlyDescription}
-            data-yearly={plan.yearlyDescription}
-          >
-            {plan.yearlyDescription}
-          </p>
-
-          <div class="mb-6">
-            <span
-              class="plan-price-display text-4xl font-brand text-neutral-800 dark:text-neutral-100"
-              data-period-display
-              data-state="yearly"
-            >
-              <span class="plan-price-placeholder" aria-hidden="true">{plan.yearlyPrice}</span>
-              <span class="plan-price-mask">
-                <span class="plan-price-track">
-                  <span class="plan-price-item" data-period="monthly" aria-hidden="true">{plan.monthlyPrice}</span>
-                  <span class="plan-price-item" data-period="yearly">{plan.yearlyPrice}</span>
-                </span>
-              </span>
+            <span class="inline-flex items-center gap-1 text-[11px] font-bold px-2 py-0.5 rounded-full bg-amber-500 text-white shadow-sm">
+              <Flame size={12} /> 推荐主力
             </span>
-            <span
-              class="plan-suffix text-sm text-neutral-400 ml-1"
-              data-monthly={plan.monthlySuffix}
-              data-yearly={plan.yearlySuffix}
-            >
-              {plan.yearlySuffix}
+          )}
+        </div>
+
+        <!-- Plan Title & Price -->
+        <div>
+          <div class="flex items-baseline justify-between">
+            <h3 class="text-2xl font-brand font-bold text-neutral-800 dark:text-neutral-100">
+              {plan.name}
+            </h3>
+            <span class="text-xs font-medium text-neutral-400 dark:text-neutral-500">
+              {plan.subName}
             </span>
           </div>
+          <p class="mt-2 text-xs text-neutral-500 dark:text-neutral-400 min-h-[34px] leading-relaxed">
+            {plan.description}
+          </p>
 
-          <ul class="space-y-3 mb-8">
+          <!-- Price Display -->
+          <div class="mt-5 pb-5 border-b border-dashed border-primary/15 dark:border-neutral-700">
+            <div class="flex items-baseline gap-1">
+              <span class="text-sm font-semibold text-neutral-500 dark:text-neutral-400">¥</span>
+              <span class="text-4xl md:text-5xl font-brand font-bold text-neutral-900 dark:text-neutral-100 tracking-tight">
+                {plan.price}
+              </span>
+              <span class="text-xs text-neutral-500 dark:text-neutral-400 font-medium">
+                {plan.period}
+              </span>
+            </div>
+            <p class="mt-1 text-[11px] text-primary/80 dark:text-primary-light/80 font-medium">
+              {plan.priceNote}
+            </p>
+          </div>
+
+          <!-- Key Metrics Pills -->
+          <div class="my-5 grid grid-cols-2 gap-2 text-center text-xs">
+            <div class="p-2.5 rounded-xl bg-bg-primary/60 dark:bg-neutral-800/60 border border-primary/10 dark:border-neutral-700">
+              <span class="block text-[10px] text-neutral-400">流量规格</span>
+              <span class="block font-semibold text-neutral-800 dark:text-neutral-100 mt-0.5">{plan.traffic}</span>
+            </div>
+            <div class="p-2.5 rounded-xl bg-bg-primary/60 dark:bg-neutral-800/60 border border-primary/10 dark:border-neutral-700">
+              <span class="block text-[10px] text-neutral-400">设备限制</span>
+              <span class="block font-semibold text-emerald-600 dark:text-emerald-400 mt-0.5">{plan.devices}</span>
+            </div>
+          </div>
+
+          <!-- Feature List -->
+          <div class="space-y-2.5 text-xs text-neutral-600 dark:text-neutral-300 mb-6">
+            <p class="text-[11px] font-semibold text-neutral-400 dark:text-neutral-500 uppercase tracking-wider">
+              包含核心权益
+            </p>
             {plan.features.map((feature) => (
-              <li class="flex items-start gap-2">
-                {feature.included ? (
-                  <Check class="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                ) : (
-                  <X class="w-4 h-4 text-neutral-300 dark:text-neutral-600 mt-0.5 flex-shrink-0" />
-                )}
-                <span class={`text-sm ${feature.included ? 'text-neutral-600 dark:text-neutral-300' : 'text-neutral-400 dark:text-neutral-500'}`}>
+              <div class="flex items-start gap-2">
+                <span class:list={[
+                  "mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full",
+                  feature.highlight ? "bg-emerald-500/15 text-emerald-600 dark:text-emerald-400" : "bg-neutral-200 dark:bg-neutral-700 text-neutral-500"
+                ]}>
+                  <Check size={11} stroke-width={2.5} />
+                </span>
+                <span class={feature.highlight ? "font-medium text-neutral-800 dark:text-neutral-100" : ""}>
                   {feature.text}
                 </span>
-              </li>
+              </div>
             ))}
-          </ul>
+          </div>
 
+          <!-- Unlocks / Suitable -->
+          <div class="pt-4 border-t border-dashed border-primary/15 dark:border-neutral-700 text-xs">
+            <p class="text-[11px] font-semibold text-neutral-400 dark:text-neutral-500 mb-1.5">业务解锁能力</p>
+            <p class="text-neutral-600 dark:text-neutral-300 leading-relaxed text-[11px]">
+              {plan.unlocks.slice(0, 3).join(" · ")}
+            </p>
+          </div>
+        </div>
+
+        <!-- Action Button -->
+        <div class="mt-7">
           <Button
-            url={plan.popular ? siteConfig.social.github : "#"}
-            type={plan.popular ? "fill" : "outline"}
-            className="w-full justify-center"
+            url={REGISTER_URL}
+            target="_blank"
+            rel="nofollow noopener noreferrer"
+            type={plan.popular ? "fill" : "solid"}
+            className="w-full max-w-none justify-center py-3 text-sm font-semibold"
           >
-            {plan.cta} {plan.popular && <ArrowRight size={16} />}
+            {plan.ctaText} <ArrowRight size={15} />
           </Button>
         </div>
-      ))}
+      </div>
+    ))}
+  </div>
+
+  <!-- Bottom Clarification & Trust Strip -->
+  <div class="mt-12 p-5 rounded-2xl border border-dashed border-primary/20 bg-primary/5 text-xs text-neutral-600 dark:text-neutral-300 flex flex-col md:flex-row items-center justify-between gap-4">
+    <div class="flex items-center gap-3">
+      <div class="w-8 h-8 rounded-full bg-primary/15 text-primary flex items-center justify-center shrink-0">
+        <Shield size={18} />
+      </div>
+      <div>
+        <p class="font-semibold text-neutral-800 dark:text-neutral-100">官方正版授权 · 100% 真实线路</p>
+        <p class="text-neutral-500 dark:text-neutral-400 mt-0.5">全节点支持 VLESS 协议传输与 Clash、Shadowrocket 等主流客户端无缝导入，提供 7×24 专线运维保障。</p>
+      </div>
+    </div>
+    <div class="shrink-0 flex items-center gap-2">
+      <span class="text-neutral-400 text-[11px]">统一官方注册通道：</span>
+      <a
+        href={REGISTER_URL}
+        target="_blank"
+        rel="nofollow noopener noreferrer"
+        class="inline-flex items-center gap-1 font-semibold text-primary dark:text-primary-light hover:underline"
+      >
+        进入官方用户中心 <ArrowRight size={14} />
+      </a>
     </div>
   </div>
 </section>
-
-<script>
-  function applyPeriod(isYearly: boolean) {
-    const key = isYearly ? 'yearly' : 'monthly';
-    const state = isYearly ? 'yearly' : 'monthly';
-
-    // Roll-animate price displays by flipping data-state (CSS handles the transform).
-    document
-      .querySelectorAll<HTMLElement>('.pricing-section [data-period-display]')
-      .forEach((displayEl) => {
-        displayEl.dataset.state = state;
-        displayEl.querySelectorAll<HTMLElement>('.plan-price-item').forEach((item) => {
-          const isActive = item.dataset.period === state;
-          item.setAttribute('aria-hidden', String(!isActive));
-        });
-      });
-
-    // Text-content swap for description and suffix.
-    document
-      .querySelectorAll<HTMLElement>('.pricing-section [data-monthly][data-yearly]')
-      .forEach((el) => {
-        const next = el.dataset[key];
-        if (next !== undefined && el.textContent !== next) {
-          el.textContent = next;
-        }
-      });
-  }
-
-  window.addEventListener('pricing-toggle', ((e: CustomEvent) => {
-    applyPeriod(Boolean(e.detail?.isYearly));
-  }) as EventListener);
-
-  // Initial state matches PricingToggle's default (yearly).
-  applyPeriod(true);
-</script>
-
-<style>
-  /* ─── Price roll animation ──────────────────────── */
-  /* Placeholder sets the display's size + baseline so the suffix stays
-     aligned to the price's text baseline. Both prices in a card are the
-     same character count, so the placeholder width fits either value. */
-  .plan-price-display {
-    position: relative;
-    display: inline-block;
-    vertical-align: baseline;
-  }
-
-  .plan-price-placeholder {
-    visibility: hidden;
-  }
-
-  .plan-price-mask {
-    position: absolute;
-    inset: 0;
-    overflow: hidden;
-  }
-
-  .plan-price-track {
-    display: flex;
-    flex-direction: column;
-    transition: transform 0.5s cubic-bezier(0.65, 0, 0.35, 1);
-    will-change: transform;
-  }
-
-  .plan-price-item {
-    display: block;
-  }
-
-  .plan-price-display[data-state="monthly"] .plan-price-track {
-    transform: translateY(0);
-  }
-
-  .plan-price-display[data-state="yearly"] .plan-price-track {
-    transform: translateY(-50%);
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .plan-price-track {
-      transition: none;
-    }
-  }
-
-  /* ─── "Most Popular" badge ──────────────────────── */
-  .popular-badge__pill {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.375rem;
-    padding: 0.4rem 0.85rem;
-    border-radius: 9999px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    color: #fff;
-    background: linear-gradient(
-      120deg,
-      var(--color-primary) 0%,
-      color-mix(in oklab, var(--color-primary) 70%, var(--color-accent)) 55%,
-      var(--color-accent) 100%
-    );
-    box-shadow:
-      0 6px 18px -6px color-mix(in oklab, var(--color-primary) 65%, transparent),
-      0 2px 6px -2px color-mix(in oklab, var(--color-accent) 50%, transparent),
-      inset 0 1px 0 rgba(255, 255, 255, 0.35);
-    isolation: isolate;
-    overflow: hidden;
-  }
-
-  /* Soft outer ring */
-  .popular-badge__pill::before {
-    content: "";
-    position: absolute;
-    inset: -1px;
-    border-radius: inherit;
-    padding: 1px;
-    background: linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.55),
-      rgba(255, 255, 255, 0) 45%,
-      rgba(255, 255, 255, 0.25)
-    );
-    -webkit-mask:
-      linear-gradient(#000 0 0) content-box,
-      linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-            mask-composite: exclude;
-    pointer-events: none;
-  }
-
-  /* Diagonal shine sweep */
-  .popular-badge__pill::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    background: linear-gradient(
-      105deg,
-      transparent 30%,
-      rgba(255, 255, 255, 0.55) 50%,
-      transparent 70%
-    );
-    transform: translateX(-120%);
-    animation: popular-shine 4.5s ease-in-out 1s infinite;
-    pointer-events: none;
-  }
-
-  .popular-badge__label {
-    position: relative;
-    z-index: 1;
-    line-height: 1;
-  }
-
-  .popular-badge svg {
-    position: relative;
-    z-index: 1;
-    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.15));
-  }
-
-  @keyframes popular-shine {
-    0%        { transform: translateX(-120%); }
-    55%, 100% { transform: translateX(220%); }
-  }
-
-  /* Dark mode — deeper glow, same gradient */
-  :global(.dark) .popular-badge__pill {
-    box-shadow:
-      0 8px 22px -6px color-mix(in oklab, var(--color-primary) 80%, transparent),
-      0 2px 8px -2px color-mix(in oklab, var(--color-accent) 55%, transparent),
-      inset 0 1px 0 rgba(255, 255, 255, 0.25);
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .popular-badge__pill::after {
-      animation: none;
-    }
-  }
-</style>

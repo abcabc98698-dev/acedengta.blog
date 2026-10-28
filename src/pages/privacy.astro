@@ -1,0 +1,52 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import PageHeader from "@/components/elements/PageHeader.astro";
+
+const lastUpdated = "2026年5月1日";
+---
+
+<Layout
+  title="隐私政策 — 灯塔加速器官方品牌官网"
+  description="灯塔加速器严格遵守零日志政策，保障用户的个人数据安全与数字网络隐私。"
+>
+  <section class="site-container my-12">
+    <PageHeader
+      title="隐私保护政策"
+      description={`最近更新日期：${lastUpdated}。我们视用户的数字隐私为最高安全基线。`}
+    />
+  </section>
+
+  <section class="site-container max-w-3xl mx-auto pb-24">
+    <article class="prose prose-neutral dark:prose-invert max-w-none text-sm sm:text-base leading-relaxed space-y-6 text-neutral-600 dark:text-neutral-300">
+      <div class="p-4 rounded-xl bg-primary/5 border border-dashed border-primary/20 text-xs sm:text-sm">
+        <strong class="text-primary dark:text-primary-light">核心原则：</strong>
+        灯塔加速器坚决恪守严格的“无活动日志（No-Logs）”准则。我们不会记录、监控、存储或转售用户的具体访问记录、DNS 解析查询、下载文件或网络通信内容。
+      </div>
+
+      <h2 class="text-xl font-brand font-bold text-neutral-800 dark:text-neutral-100">1. 我们收集的信息</h2>
+      <p>为了保障加速账户的正常认证与结算，我们仅收集最低限度的账户元信息：</p>
+      <ul class="list-disc pl-5 space-y-1 text-sm">
+        <li>注册时提交的电子邮箱地址（用于账户登录、找回密码与订单回执）；</li>
+        <li>套餐订阅状态与总流量消耗统计（用于核算流量配额与到期提醒）；</li>
+        <li>支付交易完成凭证（订单号与金额，不留存银行卡或具体支付账号敏感信息）。</li>
+      </ul>
+
+      <h2 class="text-xl font-brand font-bold text-neutral-800 dark:text-neutral-100">2. 我们绝对不收集的信息</h2>
+      <ul class="list-disc pl-5 space-y-1 text-sm">
+        <li>不记录用户的真实源 IP 地址与地理位置日志；</li>
+        <li>不记录用户浏览的目标网站、在线行为与传输数据包内容；</li>
+        <li>不存储任何形式的 DNS 访问历史。</li>
+      </ul>
+
+      <h2 class="text-xl font-brand font-bold text-neutral-800 dark:text-neutral-100">3. 数据安全与传输加密</h2>
+      <p>
+        全站通信依托高强度 SSL/TLS 加密通道传输。核心专线传输采用现代加密架构，物理链路上实现业务隔离与防护，规避公网窃听与中间人拦截。
+      </p>
+
+      <h2 class="text-xl font-brand font-bold text-neutral-800 dark:text-neutral-100">4. 政策变更与联系支持</h2>
+      <p>
+        如本政策有实质性调整，我们将于官方网站显著位置提前公布。若对隐私政策有任何疑问，欢迎通过工单或邮件（contact@acedengta.blog）联系官方合规团队。
+      </p>
+    </article>
+  </section>
+</Layout>

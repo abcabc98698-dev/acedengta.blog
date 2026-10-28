@@ -3,136 +3,144 @@ import Layout from "@/layouts/Layout.astro";
 import PageHeader from "@/components/elements/PageHeader.astro";
 import Button from "@/components/ui/Button.astro";
 import Badge from "@/components/ui/Badge.astro";
-import { ArrowRight, Heart, Code, Users, Compass } from "@lucide/astro";
+import { REGISTER_URL } from "@/config/site";
+import { ArrowRight, ShieldCheck, Heart, Zap, Globe, Compass, Users } from "@lucide/astro";
 
-const timeline = [
+const history = [
   {
-    version: "v0.1",
-    date: "2026年1月",
-    title: "灯塔构想与技术原型",
-    desc: "确立以零运行时、极速静态渲染与优雅设计令牌为核心的独立平台构想，完成核心页面骨架与明暗双色体系。",
+    year: "2020",
+    title: "灯塔加速器创立",
+    desc: "针对公网跨境网络频繁断流与晚高峰严重降速的痛点，团队搭建首批跨境专线测试节点，正式开启商业化运营。",
   },
   {
-    version: "v0.2",
-    date: "2026年3月",
-    title: "设计系统与交互深度打磨",
-    desc: "全链路微调间距节奏、文字可读性与无障碍对比度，引入可复用视窗模拟组件与自然进入动效。",
+    year: "2022",
+    title: "骨干网络全面升级为 IEPL 专线",
+    desc: "全链路切入内网商业物理专线，接入香港、日本等亚太核心机房原生 IP，实现晚高峰 4K 流媒体秒开与超低时延。",
   },
   {
-    version: "v0.3",
-    date: "2026年4月",
-    title: "内容层架构升级",
-    desc: "迁移至 Astro 6 Content Layer 现代内容底座，冷启动构建提速 30%，实现强类型 MDX 内容校验。",
+    year: "2024",
+    title: "全面拥抱 VLESS 协议与自研生态",
+    desc: "淘汰冗余旧协议，全节点标配现代 VLESS 架构；推出官方简易自研客户端，并完美保留 Clash、Shadowrocket 等主流第三方订阅导入生态。",
   },
   {
-    version: "v1.0",
-    date: "2026年5月",
-    title: "代码级纯净化与资产全独立",
-    desc: "连根拔除克隆残留的全部暗桩、外部私人凭据与外链，规范化绝对路径 Canonical URL 与 JSON-LD 结构化数据，全站达成 Lighthouse 95+ 卓越基准。",
+    year: "2026",
+    title: "品牌官网全新升级 · 权威官方门户",
+    desc: "全链路纯净化重构，建立正版官方品牌门户 acedengta.blog，规范化注册转化、透明套餐展示与专业知识库系统。",
   },
 ];
 ---
 
 <Layout
-  title="关于我们 — Ace灯塔"
-  description="了解 Ace灯塔：一座专注于现代前端工程、独立产品实践与数字化深度思考的技术灯塔。"
+  title="关于我们 — 灯塔加速器官方品牌官网"
+  description="了解灯塔加速器的品牌起源与技术坚守。自 2020 年起稳定运营，专注于提供高品质 IEPL 企业专线与原生节点加速服务。"
 >
   <section class="site-container my-12">
     <PageHeader
-      title="照亮独立技术与数字化产品的探索之路"
-      description="我们专注于分享经过生产检验的前端架构、高效工程化工具与扎实的产品思考。代码完全自主，对搜索引擎深度友好。"
+      title="以专业专线，照亮您的全球网络航路"
+      description="始于 2020 年的稳健加速品牌。不玩弄价格套路，坚持以真实物理专线与原生 IP 为全球用户提供可信赖的服务。"
     />
   </section>
 
-  <section class="site-container max-w-3xl mx-auto pb-24">
-    <article class="space-y-10">
-
-      <!-- Why we built it -->
-      <div data-aos="fade-up-xs" data-aos-once="true">
-        <h2 class="text-2xl font-brand text-neutral-800 dark:text-neutral-100 mb-4">为什么创立 Ace灯塔</h2>
-        <div class="space-y-4 text-neutral-600 dark:text-neutral-300 leading-relaxed">
-          <p>
-            在开源世界中，充斥着两类极端：一类是徒有其表的“极简骨架”，稍加复杂需求便需要推倒重来；另一类则是堆砌数十个冗余依赖与第三方商业暗桩的臃肿体系，难以理清依赖关系与隐私归属。
-          </p>
-          <p>
-            Ace灯塔致力于探索“纯净且具备生产级水准”的中间道路。我们坚持清晰的架构边界、零运行时优先的性能原则与完全自主可控的资产体系。
-          </p>
-          <p>
-            我们选型 Astro 是因为其默认 Zero-JS 架构能为内容与营销站点带来绝佳的响应速度；选型 Tailwind CSS 是为了借力设计令牌（Design Tokens）实现极速的全局样式管控；选型 Instrument Serif 与 Inter 的字体搭配，则是为了在现代数字界面中注入一份克制的人文韵味。
-          </p>
-        </div>
+  <section class="site-container max-w-3xl mx-auto pb-24 space-y-12">
+    <!-- Brand Story -->
+    <article class="space-y-6 text-neutral-600 dark:text-neutral-300 leading-relaxed text-sm sm:text-base">
+      <div class="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-800 dark:text-emerald-300 flex items-center gap-3 text-xs sm:text-sm font-medium">
+        <ShieldCheck size={20} class="shrink-0 text-emerald-600 dark:text-emerald-400" />
+        <span>官方正版授权认证：本站点为灯塔加速器品牌官方授权服务与信息发布门户。</span>
       </div>
 
-      <div class="w-full border-b border-dashed border-neutral-200 dark:border-neutral-700"></div>
-
-      <!-- Values -->
-      <div data-aos="fade-up-xs" data-aos-delay="100" data-aos-once="true">
-        <h2 class="text-2xl font-brand text-neutral-800 dark:text-neutral-100 mb-6">我们恪守的原则</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div class="p-5 rounded-xl bg-bg-secondary dark:bg-bg-secondary-dark border border-primary/10 dark:border-neutral-700">
-            <Code class="w-5 h-5 text-primary mb-3" />
-            <h3 class="text-sm font-semibold text-neutral-800 dark:text-neutral-100 mb-1">代码纯净与可维护</h3>
-            <p class="text-sm text-neutral-500 dark:text-neutral-400">杜绝冗余暗桩与外部侵入式依赖。每一个组件与工具函数都遵循统一严谨的工程标准。</p>
-          </div>
-          <div class="p-5 rounded-xl bg-bg-secondary dark:bg-bg-secondary-dark border border-primary/10 dark:border-neutral-700">
-            <Users class="w-5 h-5 text-primary mb-3" />
-            <h3 class="text-sm font-semibold text-neutral-800 dark:text-neutral-100 mb-1">用户与无障碍友好</h3>
-            <p class="text-sm text-neutral-500 dark:text-neutral-400">严格校验色彩对比度与动效偏好设置，无论浅色还是深色模式均提供舒适自然的阅读体验。</p>
-          </div>
-          <div class="p-5 rounded-xl bg-bg-secondary dark:bg-bg-secondary-dark border border-primary/10 dark:border-neutral-700">
-            <Heart class="w-5 h-5 text-primary mb-3" />
-            <h3 class="text-sm font-semibold text-neutral-800 dark:text-neutral-100 mb-1">深度原创与工匠精神</h3>
-            <p class="text-sm text-neutral-500 dark:text-neutral-400">排版节奏、间距度量与交互微动效皆经深思熟虑，拒绝模板套用感与空洞的营销填空。</p>
-          </div>
-          <div class="p-5 rounded-xl bg-bg-secondary dark:bg-bg-secondary-dark border border-primary/10 dark:border-neutral-700">
-            <Compass class="w-5 h-5 text-primary mb-3" />
-            <h3 class="text-sm font-semibold text-neutral-800 dark:text-neutral-100 mb-1">开放探索与技术沉淀</h3>
-            <p class="text-sm text-neutral-500 dark:text-neutral-400">遵循清晰的开源许可，不搞技术绑架。让真实的经验与方法论成为开发者远航的指南针。</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="w-full border-b border-dashed border-neutral-200 dark:border-neutral-700"></div>
-
-      <!-- Timeline -->
-      <div data-aos="fade-up-xs" data-aos-delay="100" data-aos-once="true">
-        <h2 class="text-2xl font-brand text-neutral-800 dark:text-neutral-100 mb-6">演进历程与里程碑</h2>
-        <div class="relative">
-          <div class="absolute left-3 md:left-4 top-1.5 bottom-1.5 w-px bg-neutral-200 dark:bg-neutral-700"></div>
-          <ol class="space-y-8">
-            {timeline.map((item, i) => (
-              <li class="relative pl-10 md:pl-12" data-aos="fade-up-sm" data-aos-delay={i * 80} data-aos-once="true">
-                <div class="absolute left-1.5 md:left-2.5 top-1.5 w-3 h-3 rounded-full bg-primary border-2 border-bg-primary dark:border-bg-primary-dark"></div>
-                <div class="mb-1 flex items-center gap-3 flex-wrap">
-                  <Badge variant="primary" size="sm">{item.version}</Badge>
-                  <span class="text-xs text-neutral-400 dark:text-neutral-500">{item.date}</span>
-                </div>
-                <h3 class="text-base font-semibold text-neutral-800 dark:text-neutral-100 mb-1">{item.title}</h3>
-                <p class="text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed">{item.desc}</p>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </div>
-
-      <div class="w-full border-b border-dashed border-neutral-200 dark:border-neutral-700"></div>
-
-      <!-- Open source -->
-      <div data-aos="fade-up-xs" data-aos-delay="100" data-aos-once="true">
-        <h2 class="text-2xl font-brand text-neutral-800 dark:text-neutral-100 mb-4">加入交流与探索</h2>
-        <p class="text-neutral-600 dark:text-neutral-300 leading-relaxed mb-6">
-          Ace灯塔致力于成为持续有生命力的技术生态。无论你是寻找灵感的开发者、全栈工程师，还是独立数字化产品创造者，都欢迎随时与我们建立连接。
-        </p>
-      </div>
-
-      <div class="flex flex-wrap gap-4" data-aos="fade-up-xs" data-aos-delay="200" data-aos-once="true">
-        <Button url="/blog" type="fill">
-          阅读最新文章 <ArrowRight size={16} />
-        </Button>
-        <Button url="/contact">
-          联系我们
-        </Button>
-      </div>
+      <h2 class="text-2xl font-brand font-bold text-neutral-800 dark:text-neutral-100 pt-4">
+        我们的品牌坚守
+      </h2>
+      <p>
+        在过去数年间，加速市场涌现过无数追求极致低价、却在短短几个月后跑路失联的临时公网中继服务。公网隧道拥堵、高峰期剧烈卡顿、IP 被各大平台频繁风控，消耗了用户大量的试错成本。
+      </p>
+      <p>
+        <strong>灯塔加速器</strong>自 2020 年诞生之初，便确立了“以线路品质为核心、以长期稳健为基准”的运营方向。我们并不单纯追求行业最低的营销标价，而是将资源扎实投入在全链路 IEPL / IPLC 企业专线采购与原生机房 IP 维护上，确保每一位用户的每一次连接都能得到稳定、纯净的保障。
+      </p>
     </article>
+
+    <div class="w-full border-b border-dashed border-primary/20 dark:border-neutral-700"></div>
+
+    <!-- Core Values -->
+    <div>
+      <h2 class="text-2xl font-brand font-bold text-neutral-800 dark:text-neutral-100 mb-6">
+        三大核心承诺
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+        <div class="p-5 rounded-2xl bg-bg-secondary dark:bg-bg-secondary-dark border border-primary/10 dark:border-neutral-700">
+          <Zap class="w-6 h-6 text-primary mb-3" />
+          <h3 class="font-bold text-neutral-800 dark:text-neutral-100 text-sm mb-1.5">纯专线不降级</h3>
+          <p class="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed">
+            核心主力节点全系采用内网商业物理专线，杜绝公网偷工减料，晚高峰依然保持稳定与高码率推流。
+          </p>
+        </div>
+        <div class="p-5 rounded-2xl bg-bg-secondary dark:bg-bg-secondary-dark border border-primary/10 dark:border-neutral-700">
+          <Users class="w-6 h-6 text-primary mb-3" />
+          <h3 class="font-bold text-neutral-800 dark:text-neutral-100 text-sm mb-1.5">不限设备在线</h3>
+          <p class="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed">
+            全面打破单设备并发限制。一个账号即可满足全套个人数码设备或小微出海团队同时在线协同。
+          </p>
+        </div>
+        <div class="p-5 rounded-2xl bg-bg-secondary dark:bg-bg-secondary-dark border border-primary/10 dark:border-neutral-700">
+          <ShieldCheck class="w-6 h-6 text-primary mb-3" />
+          <h3 class="font-bold text-neutral-800 dark:text-neutral-100 text-sm mb-1.5">真实数据透明</h3>
+          <p class="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed">
+            不虚构虚假运营数字与假评论。节点倍率真实公示，8.25元/月年付折算说明清晰，诚信对待每一位用户。
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="w-full border-b border-dashed border-primary/20 dark:border-neutral-700"></div>
+
+    <!-- Timeline -->
+    <div>
+      <h2 class="text-2xl font-brand font-bold text-neutral-800 dark:text-neutral-100 mb-6">
+        品牌发展轨迹 (2020 - 至今)
+      </h2>
+      <div class="relative pl-6 md:pl-8 border-l border-primary/20 dark:border-neutral-700 space-y-8">
+        {history.map((item) => (
+          <div class="relative">
+            <div class="absolute -left-[31px] md:-left-[39px] top-1.5 w-3 h-3 rounded-full bg-primary border-2 border-bg-primary dark:border-bg-primary-dark"></div>
+            <div class="flex items-center gap-2 mb-1">
+              <span class="font-mono text-xs font-bold text-primary dark:text-primary-light px-2 py-0.5 rounded bg-primary/10">
+                {item.year}
+              </span>
+              <h3 class="font-bold text-neutral-800 dark:text-neutral-100 text-base">
+                {item.title}
+              </h3>
+            </div>
+            <p class="text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed mt-1">
+              {item.desc}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="pt-8 text-center border-t border-dashed border-primary/20 dark:border-neutral-700">
+      <h3 class="text-xl sm:text-2xl font-brand font-bold text-neutral-800 dark:text-neutral-100 mb-3">
+        选择值得长期托付的高速专线
+      </h3>
+      <p class="text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 mb-6">
+        进入官方统一通道，开启畅快无阻的全球网络体验。
+      </p>
+      <div class="flex flex-wrap justify-center gap-3">
+        <Button
+          url={REGISTER_URL}
+          target="_blank"
+          rel="nofollow noopener noreferrer"
+          type="fill"
+          className="px-8 py-3.5 font-semibold text-base"
+        >
+          立即注册开通 <ArrowRight size={16} />
+        </Button>
+        <Button url="/#pricing" className="px-8 py-3.5 font-semibold text-base">
+          查看套餐方案
+        </Button>
+      </div>
+    </div>
   </section>
 </Layout>

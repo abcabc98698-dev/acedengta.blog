@@ -7,398 +7,290 @@ import FAQ from "@/components/sections/FAQ.astro";
 import BlogSection from "@/components/sections/BlogSection.astro";
 import Button from "@/components/ui/Button.astro";
 import BrowserFrame from "@/components/ui/BrowserFrame.astro";
-import TechStackCard from "@/components/cards/TechStackCard.astro";
-
+import { siteConfig, REGISTER_URL } from "@/config/site";
 import {
-  LayoutDashboard, Layers, FileText,
-  Bot, Code, PenTool, Rocket, GitFork, ChartNoAxesColumnIncreasing,
-  ArrowRight,
-  Compass, Triangle, Sun, CircleDot, Orbit, Anvil
+  ShieldCheck, Zap, Globe, Cpu, Laptop, Smartphone,
+  CheckCircle2, ArrowRight, Lock, Activity, Sparkles, Server,
+  Download, RefreshCw, KeyRound, Radio, Network
 } from "@lucide/astro";
 
-// FAQ data
+// FAQ 数据：真实、具体、诚恳，不制造虚假评分与假评论
 const faqItems = [
-  { question: "Ace灯塔的核心理念是什么？", answer: "Ace灯塔坚持“克制与优雅”，专注于现代全栈工程化、零运行时性能优先以及原创技术探索。通过真实实践沉淀高价值的架构经验。" },
-  { question: "技术栈是如何规划的？", answer: "以 Astro 现代化岛屿架构为核心，搭配 Tailwind CSS 原子样式系统与 TypeScript，在保证极致加载速度的同时兼具高工程维护性。" },
-  { question: "如何适配搜索引擎与社交分享（SEO）？", answer: "全站深度整合绝对路径规范链接（Canonical URL）、OpenGraph 社交图谱标签以及基于 Schema.org 的 JSON-LD 结构化数据，确保搜索引擎友好收录。" },
-  { question: "是否支持全静态化部署？", answer: "是的。构建产物为标准纯静态 dist 资源，可无缝部署至 Cloudflare Pages、Vercel、Netlify 或任何标准云存储与 CDN 边缘网络。" },
-  { question: "性能基线是如何保障的？", answer: "默认采用 Zero-JS 架构，首屏仅加载必需结构与样式，经实测在移动端与桌面端均稳定保持 Lighthouse 95+ 卓越评级。" },
-  { question: "如何获取更多技术交流或反馈？", answer: "欢迎通过联系我们页面或发送邮件至 contact@acedengta.blog，我们十分乐意与志同道合的开发者深入交流。" },
+  {
+    question: "“8.25 元/月”是怎么计算出来的？",
+    answer: "8.25 元/月属于“轻量版”年付套餐（99元/年）折算后的平均每月成本，并非普通的按月单月结算价格。年付方案适合需要长期稳定低成本办公、查阅资料与日常轻度娱乐的用户。"
+  },
+  {
+    question: "灯塔加速器的线路质量如何？晚高峰会卡顿吗？",
+    answer: "灯塔加速器自 2020 年起稳定运营，核心骨干采用全链路 IEPL 企业级内网专线与全球 IPLC 商业专线，数据直接经由内网物理通道过境，不挤公网拥堵隧道。全节点部署 VLESS 协议，单节点最高支持 2.5Gbps 带宽，实测在晚高峰时期丢包率接近于 0，保持毫秒级流畅响应。"
+  },
+  {
+    question: "是否支持 ChatGPT、Claude 等 AI 工具及海外 4K 流媒体？",
+    answer: "是的。品牌专线节点深度覆盖主流 AI 工具（ChatGPT / Claude / Midjourney）及海外 4K 流媒体（Netflix / Disney+ / YouTube / TikTok 国际版等）访问场景。由于流媒体与 AI 平台策略会动态变动，建议使用时结合节点标注进行优选。"
+  },
+  {
+    question: "一个账号支持几台设备同时连接？",
+    answer: "全系列套餐均享受“不限设备数量”政策。无论手机、平板、笔记本还是台式机，均可在同一账号下同时连接在线，非常适合个人全设备覆盖或团队多成员协同办公。"
+  },
+  {
+    question: "支持哪些客户端软件？新手如何配置？",
+    answer: "灯塔加速器提供官方自研客户端，免去复杂配置，一键登录即可直连；同时保留了极高灵活性的第三方订阅导入能力，完美兼容 Clash (Windows / macOS / Android)、Shadowrocket (iOS 小火箭)、Surge、Sing-box 等主流工具。官网用户中心与知识库均提供详尽的一对一图文指引。"
+  },
+  {
+    question: "“致敬斯诺克147永久套餐”是真的永久不过期吗？",
+    answer: "是的。“致敬斯诺克147”套餐为一次性买断永久版，内含 247GB 永久高速流量，流量用完即止，没有月付或年付到期清零的时间限制。特别适合轻度用量、备用网络或长期跨国通讯的用户。"
+  },
 ];
 
-// Features data
+// 产品优势六大维度
 const features = [
-  { icon: "/assets/icon/structure.png",  title: "清晰的架构分层", desc: "主页、技术方案、博客系统、更新日志、关于我们与联系交互，全链路模块化解耦。" },
-  { icon: "/assets/icon/components.png", title: "可复用组件体系", desc: "15+ 核心业务与展示区块，支持自由组合编排，杜绝样式污染与布局冲突。" },
-  { icon: "/assets/icon/document.png",   title: "MDX 驱动的内容底座", desc: "基于 Astro 6 Content Layer 强类型 Schema 校验，Markdown 与交互组件自然交融。" },
-  { icon: "/assets/icon/fast.png",       title: "极致轻量与首屏飞速", desc: "零冗余运行时，首屏资源极致压缩，全平台实测达成 Lighthouse 95+ 标杆表现。" },
-  { icon: "/assets/icon/motion.png",     title: "丝滑交互与微动效", desc: "优雅的滚动入场动效与微交互，完全尊重用户的 prefers-reduced-motion 无障碍偏好。" },
-  { icon: "/assets/icon/customize.png",  title: "设计令牌统一管控", desc: "通过纯粹的 CSS 设计令牌驱动色彩、字阶与排版间距，实现统一且可扩展的视觉底座。" },
+  {
+    icon: Zap,
+    title: "IEPL 企业内网专线",
+    desc: "全链路商业内网专线直连，物理过境避开公网风暴与晚高峰拥堵，丢包率极低，低至 12ms 极速响应。",
+  },
+  {
+    icon: Cpu,
+    title: "现代 VLESS 极速协议",
+    desc: "全节点标配 VLESS 传输架构，轻量高效，去除冗余加密握手包，兼顾极高隐蔽性与毫秒级首包响应。",
+  },
+  {
+    icon: Globe,
+    title: "全球优质原生节点集群",
+    desc: "精选香港×20、台湾×5、日本×10、新加坡×10、美国×10、欧洲等核心机房原生 IP，单节点最高 2.5Gbps。",
+  },
+  {
+    icon: Sparkles,
+    title: "流媒体 & AI 原生深度解锁",
+    desc: "原生支持 Netflix、Disney+ 4K 超高清秒开，官方纯净 IP 畅行 ChatGPT、Claude 与 TikTok 电商直播。",
+  },
+  {
+    icon: Laptop,
+    title: "多端接入 · 不限设备数量",
+    desc: "打破传统机场设备并发数限制，全系列套餐支持手机、平板、电脑多端同时在线，无并发门槛。",
+  },
+  {
+    icon: ShieldCheck,
+    title: "自研客户端 + 开放生态订阅",
+    desc: "提供简易直连自研客户端，同时无缝兼容 Clash、Shadowrocket (小火箭) 等第三方主流订阅导入。",
+  },
 ];
 
-// Problem cards data
-const problems = [
-  { icon: "/assets/icon/clock.png",   title: "从零搭建耗费心力", desc: "重复配置路由、SEO、字体与暗色逻辑，耗尽了开发者原本应投入在业务思考上的核心精力。" },
-  { icon: "/assets/icon/battery.png", title: "千篇一律的粗糙感", desc: "市面模板充斥着生硬的默认样式与拼凑感，缺乏经过推敲的视觉韵律与独立品牌调性。" },
-  { icon: "/assets/icon/bell.png",    title: "隐式暗桩与不可控冗余", desc: "许多开源方案夹杂着复杂的第三方暗桩与冗余追踪代码，给后期独立化维护带来长期隐患。" },
+// 使用流程三步
+const steps = [
+  {
+    step: "01",
+    title: "进入官网注册并选购套餐",
+    desc: "通过官方统一入口注册账号，根据业务需求选择永久版、年付轻量版或 IPLC 极速版套餐。",
+  },
+  {
+    step: "02",
+    title: "下载客户端或复制订阅",
+    desc: "在官方用户中心下载自研客户端，或一键导入专属订阅到 Clash、Shadowrocket 等常用工具中。",
+  },
+  {
+    step: "03",
+    title: "一键连接，开启高速畅连",
+    desc: "选择目标国家延迟最低的高速节点，开启系统代理，即可尽情畅享 4K 流媒体与全球生产力应用。",
+  },
 ];
 
-// Use cases
-const useCases = [
-  { icon: Bot, label: "AI 原生产品", desc: "为现代化智能应用打造高信赖度的主站载体" },
-  { icon: Code, label: "开发者工具", desc: "优雅展示 SDK、API 工具与前沿开源项目" },
-  { icon: PenTool, label: "数字化探索", desc: "沉淀创意设计与交互规范的高品质空间" },
-  { icon: Rocket, label: "独立出海产品", desc: "助力独立开发者快速打造专业商业化门面" },
-  { icon: GitFork, label: "技术知识库", desc: "长期沉淀严谨、原创且结构化的技术文章" },
-  { icon: ChartNoAxesColumnIncreasing, label: "数据与分析", desc: "轻量展示产品指标、里程碑与长期迭代日志" },
-];
-
-const logos = [
-  { name: "Northwind", icon: Compass },
-  { name: "Acme", icon: Triangle },
-  { name: "Lumen", icon: Sun },
-  { name: "Helio", icon: CircleDot },
-  { name: "Orbit", icon: Orbit },
-  { name: "Forge", icon: Anvil },
+// 节点覆盖概览
+const regions = [
+  { name: "中国香港", count: "20+ 节点", ping: "10-25ms", tag: "超低时延 · 4K秒开", flag: "🇭🇰" },
+  { name: "中国台湾", count: "5+ 节点", ping: "25-40ms", tag: "原生IP · 动画疯解锁", flag: "🇹🇼" },
+  { name: "日本东京/大阪", count: "10+ 节点", ping: "35-50ms", tag: "国际骨干 · 游戏加速", flag: "🇯🇵" },
+  { name: "新加坡", count: "10+ 节点", ping: "45-60ms", tag: "TikTok 直播电商专线", flag: "🇸🇬" },
+  { name: "美国硅谷/洛杉矶", count: "10+ 节点", ping: "120-145ms", tag: "ChatGPT/Claude 原生", flag: "🇺🇸" },
+  { name: "欧洲及其他地区", count: "多国节点", ping: "150-180ms", tag: "英/德/法/土/马/泰/巴西", flag: "🌐" },
 ];
 ---
 
 <Layout
-  title="Ace灯塔 — 数字化思考与现代技术实践"
-  description="专注于现代前端架构、高效工程化工具、独立产品开发与深度技术思考。轻量、极速、原创。"
-  keywords="Ace灯塔, 独立开发, 前端架构, Astro, Tailwind CSS, 效率工具, 数字化探索, 全栈技术"
+  title={siteConfig.meta.title}
+  description={siteConfig.meta.description}
+  keywords={siteConfig.meta.keywords}
 >
 
-  <!-- 1. Hero -->
+  <!-- 1. 英雄区 -->
   <HeroSection />
 
-  <!-- 2. Logo / Social Proof -->
-  <section class="py-12 md:py-16 lg:py-24 site-container" data-aos="fade-up-xs" data-aos-once="true" data-aos-delay="650">
-    <p class="text-center text-sm text-neutral-400 dark:text-neutral-500 mb-6">面向前沿工程与现代产品的探索平台</p>
-    <div class="flex flex-wrap items-center justify-center gap-4 sm:gap-6 md:gap-8 opacity-60">
-      {logos.map((logo) => (
-        <div class="flex items-center gap-2 px-4 py-2 border border-dashed border-neutral-300 dark:border-neutral-700 rounded-lg">
-          <logo.icon class="w-4 h-4 text-neutral-400 dark:text-neutral-500" />
-          <span class="text-sm font-medium uppercase tracking-wider text-neutral-500 dark:text-neutral-400">{logo.name}</span>
+  <!-- 2. 品牌信誉背书栏 -->
+  <section class="py-8 bg-bg-secondary/60 dark:bg-bg-secondary-dark/60 border-y border-dashed border-primary/15 dark:border-neutral-700/80">
+    <div class="site-container px-4">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+        <div>
+          <span class="block text-2xl sm:text-3xl font-brand font-bold text-primary dark:text-primary-light">2020 年</span>
+          <span class="block text-xs text-neutral-500 dark:text-neutral-400 mt-1">品牌稳定运营至今</span>
         </div>
-      ))}
+        <div>
+          <span class="block text-2xl sm:text-3xl font-brand font-bold text-primary dark:text-primary-light">IEPL / IPLC</span>
+          <span class="block text-xs text-neutral-500 dark:text-neutral-400 mt-1">企业级纯专线内网</span>
+        </div>
+        <div>
+          <span class="block text-2xl sm:text-3xl font-brand font-bold text-primary dark:text-primary-light">2.5 Gbps</span>
+          <span class="block text-xs text-neutral-500 dark:text-neutral-400 mt-1">单节点最高突发带宽</span>
+        </div>
+        <div>
+          <span class="block text-2xl sm:text-3xl font-brand font-bold text-primary dark:text-primary-light">不限设备</span>
+          <span class="block text-xs text-neutral-500 dark:text-neutral-400 mt-1">多终端同时在线畅连</span>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- 3. Problem -->
-  <section class="py-16 md:py-24 site-container">
-    <SectionHeader title="为什么需要一套严谨的独立架构？" description="真正的难点往往不在于写出功能，而在于构建一个不千篇一律、不随时间失控、代码自主权完全属于你的现代系统。" />
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-      {problems.map((problem, i) => (
+  <!-- 3. 产品核心优势展示 -->
+  <section id="features" class="py-16 md:py-24 site-container">
+    <SectionHeader
+      title="为什么专业用户与出海团队选择灯塔加速器？"
+      description="拒绝频繁掉线的廉价公网中继。以企业级专线与 VLESS 协议为基座，带来全时段稳定的网络服务。"
+    />
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
+      {features.map((item, index) => (
         <div
-          class="p-6 rounded-xl bg-bg-secondary dark:bg-bg-secondary-dark border border-primary/10 dark:border-neutral-700"
+          class="p-6 sm:p-7 rounded-2xl bg-bg-secondary dark:bg-bg-secondary-dark border border-primary/10 dark:border-neutral-700/80 hover:border-primary/30 transition-all duration-300 hover:-translate-y-1"
           data-aos="fade-up-sm"
-          data-aos-delay={i * 100}
+          data-aos-delay={index * 80}
           data-aos-once="true"
         >
-          <img
-            src={problem.icon}
-            alt={problem.title}
-            loading="lazy"
-            width="64"
-            height="64"
-            class="w-16 h-16 mb-4 object-contain"
-          />
-          <h3 class="text-lg font-semibold text-neutral-800 dark:text-neutral-100 mb-2">{problem.title}</h3>
-          <p class="text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed">{problem.desc}</p>
-        </div>
-      ))}
-    </div>
-  </section>
-
-  <!-- 4. Solution -->
-  <section class="py-8 md:py-12 site-container" data-aos="fade-up-xs" data-aos-once="true">
-    <div class="max-w-2xl mx-auto text-center">
-      <h2 class="text-3xl md:text-4xl font-brand mb-4">设计系统与工程化的深度结合</h2>
-      <p class="text-neutral-600 dark:text-neutral-300 leading-relaxed">
-        Ace灯塔依托严密的令牌机制与分层约束——色彩、字阶、节奏间距与动效法则高度协同，确保新增的每一个功能模块都与整体秩序和谐共存。
-      </p>
-    </div>
-    <div class="mt-10 md:mt-12 flex flex-wrap justify-center items-end gap-4 sm:gap-6 md:gap-8">
-      {[
-        { name: 'blue', file: 'folder-blue.webp' },
-        { name: 'yellow', file: 'folder-yellow.webp' },
-        { name: 'green', file: 'folder-greean.webp' },
-        { name: 'red', file: 'folder-red.webp' },
-        { name: 'gray', file: 'folder-gray.webp' },
-      ].map((folder, i) => (
-        <div
-          data-aos="fade-up-xs"
-          data-aos-delay={i * 120}
-          data-aos-once="true"
-          class="flex flex-col items-center"
-        >
-          <img
-            src={`/assets/folder/${folder.file}`}
-            alt={`${folder.name} folder`}
-            loading="lazy"
-            class="w-20 sm:w-24 md:w-28 object-contain transition-transform duration-300 hover:-translate-y-2"
-          />
-        </div>
-      ))}
-    </div>
-  </section>
-
-  <!-- 5. Features Grid -->
-  <section class="py-16 md:py-24 site-container" data-aos="fade-up-sm" data-aos-once="true">
-    <SectionHeader title="核心特性概览" description="从底层工程基线到上层视觉呈现，每一个模块都经得起生产环境的推敲。" />
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
-      {features.map((feature, i) => (
-        <div
-          class="p-6 rounded-xl bg-bg-secondary dark:bg-bg-secondary-dark border border-primary/10 dark:border-neutral-700 transition-all duration-300 hover:border-primary/30"
-          data-aos="fade-up-sm"
-          data-aos-delay={i * 80}
-          data-aos-once="true"
-        >
-          <img
-            src={feature.icon}
-            alt={feature.title}
-            loading="lazy"
-            width="48"
-            height="48"
-            class="w-12 h-12 mb-4 object-contain"
-          />
-          <h3 class="text-base font-semibold text-neutral-800 dark:text-neutral-100 mb-2">{feature.title}</h3>
-          <p class="text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed">{feature.desc}</p>
-        </div>
-      ))}
-    </div>
-  </section>
-
-  <!-- 6. Product Preview -->
-  <section class="py-16 md:py-24 site-container" data-aos="fade-up-sm" data-aos-once="true">
-    <SectionHeader title="统一的视窗与控制中心体验" description="英雄区、特性、数据看板、系统配置——所有界面共享同一套设计语言，确保数字产品具备连贯的呼吸感。" />
-    <div class="mt-8 max-w-4xl mx-auto" data-aos="fade-up-sm" data-aos-once="true" data-aos-delay="300">
-      <BrowserFrame url="app.acedengta.blog/dashboard">
-        <div class="flex h-[300px] md:h-[400px]">
-          <!-- Sidebar -->
-          <aside class="hidden sm:flex flex-col w-14 md:w-16 border-r border-primary/10 dark:border-neutral-700 bg-bg-primary/40 dark:bg-neutral-900/40 py-4 px-2 md:px-3 gap-2">
-            <div class="w-7 h-7 mx-auto rounded-md bg-primary/15 border border-primary/30 flex items-center justify-center mb-2">
-              <div class="w-2.5 h-2.5 rounded-sm bg-primary"></div>
-            </div>
-            <div class="app-nav-active relative w-full h-8 rounded-md bg-primary/15 border border-primary/30 flex items-center justify-center">
-              <LayoutDashboard class="w-3.5 h-3.5 text-primary" />
-            </div>
-            <div class="w-full h-8 rounded-md flex items-center justify-center hover:bg-neutral-200/40 dark:hover:bg-neutral-700/40">
-              <Layers class="w-3.5 h-3.5 text-neutral-400" />
-            </div>
-            <div class="w-full h-8 rounded-md flex items-center justify-center hover:bg-neutral-200/40 dark:hover:bg-neutral-700/40">
-              <FileText class="w-3.5 h-3.5 text-neutral-400" />
-            </div>
-            <div class="w-full h-8 rounded-md flex items-center justify-center hover:bg-neutral-200/40 dark:hover:bg-neutral-700/40">
-              <ChartNoAxesColumnIncreasing class="w-3.5 h-3.5 text-neutral-400" />
-            </div>
-            <div class="flex-1"></div>
-            <div class="w-7 h-7 mx-auto rounded-full bg-accent/40 border border-accent/60"></div>
-          </aside>
-
-          <!-- Main -->
-          <div class="flex-1 flex flex-col p-4 md:p-6 overflow-hidden">
-            <!-- App header -->
-            <div class="flex items-center justify-between pb-3 border-b border-primary/10 dark:border-neutral-700">
-              <div class="flex items-center gap-2">
-                <span class="app-live-dot relative w-2 h-2 rounded-full bg-emerald-500"></span>
-                <span class="text-xs font-semibold text-neutral-700 dark:text-neutral-200">Ace 运行看板</span>
-              </div>
-              <div class="flex items-center gap-2">
-                <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-medium">稳定运行</span>
-                <div class="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center text-[10px] font-bold text-primary">A</div>
-              </div>
-            </div>
-
-            <!-- Dashboard grid -->
-            <div class="grid grid-cols-3 gap-2.5 my-3">
-              {[
-                { label: "综合性能评分", val: "99/100", change: "+1.2%", delay: "0s" },
-                { label: "索引覆盖率", val: "100%", change: "全绿标", delay: "0.6s" },
-                { label: "响应就绪状态", val: "24ms", change: "极速", delay: "1.2s" },
-              ].map((s) => (
-                <div
-                  class="app-stat-card relative overflow-hidden rounded-lg border border-primary/10 dark:border-neutral-700 bg-bg-primary/50 dark:bg-neutral-800/50 p-2.5"
-                  style={`--shimmer-delay: ${s.delay};`}
-                >
-                  <span class="text-[10px] text-neutral-400 block">{s.label}</span>
-                  <span class="text-sm md:text-base font-brand font-semibold text-neutral-800 dark:text-neutral-100">{s.val}</span>
-                  <span class="text-[9px] text-emerald-600 dark:text-emerald-400 block">{s.change}</span>
-                </div>
-              ))}
-            </div>
-
-            <!-- Activity list mock -->
-            <div class="flex-1 rounded-lg border border-primary/10 dark:border-neutral-700 bg-bg-primary/30 dark:bg-neutral-800/30 p-3 overflow-hidden">
-              <span class="text-[10px] uppercase tracking-wider text-neutral-400 mb-2 block">系统实时日志</span>
-              <div class="space-y-2 text-xs">
-                {[
-                  { time: "刚刚", action: "静态预渲染全站完成", status: "已完成" },
-                  { time: "2分钟前", action: "自动化生成标准 sitemap-index.xml", status: "就绪" },
-                  { time: "5分钟前", action: "SEO 结构化数据 Schema 校验通过", status: "通过" },
-                ].map((item) => (
-                  <div class="flex items-center justify-between text-neutral-600 dark:text-neutral-300">
-                    <span class="font-mono text-[10px] text-neutral-400">{item.time}</span>
-                    <span class="truncate mx-2">{item.action}</span>
-                    <span class="text-[10px] text-primary font-medium">{item.status}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
+          <div class="w-12 h-12 rounded-xl bg-primary/10 dark:bg-primary/20 text-primary dark:text-primary-light flex items-center justify-center mb-5">
+            <item.icon size={24} />
           </div>
-        </div>
-      </BrowserFrame>
-    </div>
-  </section>
-
-  <!-- 7. Tech Stack -->
-  <section class="py-16 md:py-24 site-container">
-    <SectionHeader title="核心技术基石" description="严选现代成熟工程生态，在开发体验、静态性能与生态扩展之间取得兼得。" />
-    <TechStackCard />
-  </section>
-
-  <!-- 8. Use Cases -->
-  <section class="py-16 md:py-24 site-container" data-aos="fade-up-sm" data-aos-once="true">
-    <SectionHeader title="应用场景与落地探索" description="无论是以技术驱动的独立产品，还是长期的深度知识沉淀，Ace灯塔皆能提供坚实的依托。" />
-    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 mt-8">
-      {useCases.map((uc, i) => (
-        <div
-          class="p-4 rounded-xl bg-bg-secondary dark:bg-bg-secondary-dark border border-primary/10 dark:border-neutral-700 text-center flex flex-col items-center justify-center transition-all duration-200 hover:-translate-y-1 hover:border-primary/30"
-          data-aos="fade-up-xs"
-          data-aos-delay={i * 60}
-          data-aos-once="true"
-        >
-          <uc.icon class="w-6 h-6 text-primary mb-2" />
-          <h4 class="text-sm font-semibold text-neutral-800 dark:text-neutral-100 mb-1">{uc.label}</h4>
-          <p class="text-xs text-neutral-400 leading-snug">{uc.desc}</p>
+          <h3 class="text-lg font-bold text-neutral-800 dark:text-neutral-100 mb-2">
+            {item.title}
+          </h3>
+          <p class="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
+            {item.desc}
+          </p>
         </div>
       ))}
     </div>
   </section>
 
-  <!-- 9. Steps / How it works -->
-  <section class="py-16 md:py-24 site-container" data-aos="fade-up-sm" data-aos-once="true">
-    <SectionHeader title="从构想到上线的标准化三步" description="清晰的工程脉络，让你的创意无需在繁复的基础搭建中空耗。" />
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-      {[
-        { step: "01", title: "配置站点基线", desc: "在 site.js 与 .env 中定义核心品牌、SEO 描述与域名，一处修改全局生效。" },
-        { step: "02", title: "内容驱动沉淀", desc: "通过 Markdown/MDX 撰写技术长文与里程碑日志，天然享受自动类型检查与目录渲染。" },
-        { step: "03", title: "全球边缘发布", desc: "一键构建轻量纯静态制品，部署至全球 CDN 边缘节点，享受毫秒级的首屏响应。" },
-      ].map((s, i) => (
+  <!-- 4. 4大卡片式套餐展示 -->
+  <Pricing />
+
+  <!-- 5. 全球原生节点覆盖 -->
+  <section class="py-16 md:py-24 bg-bg-secondary/40 dark:bg-bg-secondary-dark/40 border-y border-dashed border-primary/15 dark:border-neutral-700/80">
+    <div class="site-container">
+      <SectionHeader
+        title="全球优质骨干机房分布"
+        description="广泛部署于亚太核心枢纽与欧美重要机房，全节点原生 IP 分配，满足多样化出海与跨境业务场景。"
+      />
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-10">
+        {regions.map((reg, idx) => (
+          <div
+            class="p-5 rounded-xl bg-bg-secondary dark:bg-bg-secondary-dark border border-primary/10 dark:border-neutral-700 flex items-start justify-between"
+            data-aos="fade-up-xs"
+            data-aos-delay={idx * 60}
+            data-aos-once="true"
+          >
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="text-xl">{reg.flag}</span>
+                <h4 class="font-bold text-neutral-800 dark:text-neutral-100 text-sm">{reg.name}</h4>
+              </div>
+              <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-1">{reg.count} · {reg.tag}</p>
+            </div>
+            <span class="font-mono text-xs font-bold px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+              {reg.ping}
+            </span>
+          </div>
+        ))}
+      </div>
+      <div class="mt-8 text-center">
+        <p class="text-xs text-neutral-500 dark:text-neutral-400">
+          * 实际网络时延受本地宽带营运商及物理距离影响，数据为沿海 IEPL 骨干入口平均实测值。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. 使用流程：三步极速直连 -->
+  <section id="workflow" class="py-16 md:py-24 site-container">
+    <SectionHeader
+      title="极简 3 步，开启高速国际网络"
+      description="无论您使用自研客户端还是 Clash / Shadowrocket 等专业工具，配置均可在 2 分钟内轻松搞定。"
+    />
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
+      {steps.map((st, i) => (
         <div
-          class="relative p-6 rounded-xl bg-bg-secondary dark:bg-bg-secondary-dark border border-dashed border-primary/20 dark:border-neutral-700"
+          class="relative p-6 sm:p-7 rounded-2xl bg-bg-secondary dark:bg-bg-secondary-dark border border-dashed border-primary/25 dark:border-neutral-700"
           data-aos="fade-up-sm"
           data-aos-delay={i * 100}
           data-aos-once="true"
         >
-          <span class="text-4xl font-brand font-bold text-primary/30 dark:text-primary/20 block mb-2">{s.step}</span>
-          <h3 class="text-lg font-semibold text-neutral-800 dark:text-neutral-100 mb-2">{s.title}</h3>
-          <p class="text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed">{s.desc}</p>
+          <span class="text-4xl font-brand font-bold text-primary/30 dark:text-primary/20 block mb-3">{st.step}</span>
+          <h3 class="text-lg font-bold text-neutral-800 dark:text-neutral-100 mb-2">{st.title}</h3>
+          <p class="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">{st.desc}</p>
         </div>
       ))}
     </div>
+    <div class="mt-10 text-center">
+      <Button
+        url={REGISTER_URL}
+        target="_blank"
+        rel="nofollow noopener noreferrer"
+        type="fill"
+        className="px-8 py-3.5 font-semibold text-base mx-auto"
+      >
+        <Sparkles size={16} /> 立即前往官方注册开通 <ArrowRight size={16} />
+      </Button>
+    </div>
   </section>
 
-  <!-- 10. Pricing -->
-  <Pricing
-    title="透明且灵活的方案规划"
-    description="Ace灯塔系统本身保持开放探索态度，以下价格矩阵展示了我们在商业化产品形态中的标准分层结构。"
-  />
+  <!-- 7. 常见问题解答 FAQ -->
+  <section id="faq" class="py-8 site-container">
+    <FAQ
+      title="常见疑问与解答"
+      items={faqItems}
+    />
+  </section>
 
-  <div class="w-full border-b border-dashed border-neutral-200 dark:border-neutral-700 my-4 site-container"></div>
-
-  <!-- 11. FAQ -->
-  <FAQ
-    title="常见问题解答"
-    items={faqItems}
-  />
-
-  <!-- 12. Latest Articles -->
-  <div class="py-16 md:py-24">
-    <BlogSection title="最新原创文章" />
+  <!-- 8. 官方知识库与 SEO 教程辅助入口 -->
+  <div class="py-16 md:py-24 site-container border-t border-dashed border-primary/15 dark:border-neutral-700/80">
+    <SectionHeader
+      title="官方技术教程与使用指南"
+      description="详尽的客户端配置教程、网络协议科普与流媒体加速最佳实践，助您轻松驾驭全球网络。"
+    />
+    <div class="mt-8">
+      <BlogSection title="" limit={4} />
+    </div>
   </div>
 
-  <!-- 13. Final CTA -->
-  <section class="py-12 md:py-20 site-container rounded-xl bg-bg-secondary dark:bg-bg-secondary-dark border border-primary/10" data-aos="fade-up-xs" data-aos-once="true">
-    <div class="max-w-2xl mx-auto text-center">
-      <h2 class="text-3xl md:text-4xl font-brand mb-4" data-aos="fade-up-xs" data-aos-once="true" data-aos-delay="200">开始探索 Ace灯塔的数字化旅程</h2>
-      <p class="text-neutral-600 dark:text-neutral-300 mb-8 leading-relaxed" data-aos="fade-up-xs" data-aos-once="true" data-aos-delay="300">
-        深入阅读最新技术洞察，或查阅完整的工程化架构规范。
-      </p>
-      <div class="flex flex-wrap justify-center gap-3" data-aos="fade-up-xs" data-aos-once="true" data-aos-delay="400">
-        <Button url="/blog" type="fill" className="text-lg px-8 py-3">
-          阅读深度长文 <ArrowRight size={18} />
-        </Button>
-        <Button url="/about" className="text-lg px-8 py-3">
-          了解关于灯塔
-        </Button>
+  <!-- 9. 底部品牌官方转化卡片 -->
+  <section class="py-12 md:py-20 site-container mb-12">
+    <div
+      class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary via-primary-strong to-[#173a70] p-8 sm:p-12 text-center text-white shadow-xl shadow-primary/15"
+      data-aos="fade-up-xs"
+      data-aos-once="true"
+    >
+      <div class="max-w-2xl mx-auto">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-white/15 text-white backdrop-blur mb-4">
+          <ShieldCheck size={14} /> 官方授权 · 7×24 专线运维
+        </span>
+        <h2 class="text-3xl sm:text-5xl font-brand font-bold mb-4 tracking-tight leading-tight">
+          立即开通灯塔加速器
+        </h2>
+        <p class="text-base text-white/85 mb-8 leading-relaxed">
+          体验自 2020 年沉淀的企业级 IEPL 专线品质。不限设备接入，单节点最高 2.5Gbps，年付低至 8.25 元/月。
+        </p>
+        <div class="flex flex-wrap justify-center gap-3">
+          <Button
+            url={REGISTER_URL}
+            target="_blank"
+            rel="nofollow noopener noreferrer"
+            type="solid"
+            className="text-base px-8 py-3.5 font-bold !text-primary hover:!text-primary-strong bg-white hover:bg-neutral-100"
+          >
+            立即注册开通 <ArrowRight size={16} />
+          </Button>
+          <Button url="/#pricing" type="outline" className="text-base px-8 py-3.5 font-bold !border-white/50 !text-white hover:!bg-white/10">
+            查看套餐方案
+          </Button>
+        </div>
       </div>
     </div>
   </section>
 
 </Layout>
-
-<style>
-  /* ─── App preview — Live ping dot ─────────────────── */
-  .app-live-dot::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: 9999px;
-    background: rgb(16, 185, 129);
-    animation: app-live-ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
-  }
-  @keyframes app-live-ping {
-    0%   { transform: scale(1);   opacity: 0.7; }
-    80%, 100% { transform: scale(2.8); opacity: 0; }
-  }
-
-  /* ─── Active sidebar item — focus ring pulse ─────── */
-  .app-nav-active::after {
-    content: "";
-    position: absolute;
-    inset: -2px;
-    border-radius: 10px;
-    border: 1px solid var(--color-primary);
-    opacity: 0;
-    animation: app-nav-ring 2.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-    pointer-events: none;
-  }
-  @keyframes app-nav-ring {
-    0%        { opacity: 0;    transform: scale(0.96); }
-    50%       { opacity: 0.65; transform: scale(1.05); }
-    100%      { opacity: 0;    transform: scale(1.12); }
-  }
-
-  /* ─── Stat cards — staggered shimmer sweep ────────── */
-  .app-stat-card::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      105deg,
-      transparent 0%,
-      transparent 35%,
-      rgba(45, 109, 195, 0.18) 50%,
-      transparent 65%,
-      transparent 100%
-    );
-    transform: translateX(-100%);
-    animation: app-stat-shimmer 4.5s ease-in-out infinite;
-    animation-delay: var(--shimmer-delay, 0s);
-    pointer-events: none;
-  }
-  @keyframes app-stat-shimmer {
-    0%        { transform: translateX(-100%); }
-    35%, 100% { transform: translateX(100%);  }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .app-live-dot::before,
-    .app-nav-active::after,
-    .app-stat-card::before {
-      animation: none !important;
-    }
-  }
-</style>

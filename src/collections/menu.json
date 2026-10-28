@@ -1,27 +1,30 @@
 [
 	{
-		"name": "Home",
+		"name": "首页",
 		"url": "/"
 	},
 	{
-		"name": "Pages",
-		"children": [
-			{ "name": "Features", "url": "/features" },
-			{ "name": "Pricing", "url": "/pricing" },
-			{ "name": "About", "url": "/about" },
-			{ "name": "Blog", "url": "/blog" },
-			{ "name": "Changelog", "url": "/changelog" },
-			{ "name": "Sign in", "url": "/sign-in" },
-			{ "name": "Sign up", "url": "/sign-up" },
-			{ "name": "404", "url": "/404" }
-		]
+		"name": "套餐方案",
+		"url": "/#pricing"
 	},
 	{
-		"name": "Elements",
-		"url": "/elements"
+		"name": "核心优势",
+		"url": "/features"
 	},
 	{
-		"name": "Contact",
-		"url": "/contact"
+		"name": "使用流程",
+		"url": "/#workflow"
+	},
+	{
+		"name": "节点状态",
+		"url": "/status"
+	},
+	{
+		"name": "使用指南",
+		"url": "/blog"
+	},
+	{
+		"name": "关于我们",
+		"url": "/about"
 	}
 ]

@@ -1,0 +1,49 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import PageHeader from "@/components/elements/PageHeader.astro";
+
+const lastUpdated = "2026年5月1日";
+---
+
+<Layout
+  title="服务使用条款 — 灯塔加速器官方品牌官网"
+  description="灯塔加速器官方服务条款与用户行为准则规范。"
+>
+  <section class="site-container my-12">
+    <PageHeader
+      title="服务条款与使用协议"
+      description={`最近更新生效日期：${lastUpdated}。请在购买或使用本加速服务前仔细阅读以下条款。`}
+    />
+  </section>
+
+  <section class="site-container max-w-3xl mx-auto pb-24">
+    <article class="prose prose-neutral dark:prose-invert max-w-none text-sm sm:text-base leading-relaxed space-y-6 text-neutral-600 dark:text-neutral-300">
+      <h2 class="text-xl font-brand font-bold text-neutral-800 dark:text-neutral-100">1. 服务准则与合法合规</h2>
+      <p>
+        灯塔加速器致力于为用户提供高速合规的国际网络加速通道。用户在使用本服务进行远程办公、跨境电商营销、学术文献查阅及合法娱乐时，必须严格遵守所在国家与服务器属地的法律法规。
+      </p>
+
+      <h2 class="text-xl font-brand font-bold text-neutral-800 dark:text-neutral-100">2. 禁止使用行为</h2>
+      <p>为维护专线节点整体声誉与网络纯净度，严禁使用本服务从事以下活动：</p>
+      <ul class="list-disc pl-5 space-y-1 text-sm">
+        <li>任何形式的分布式拒绝服务攻击（DDoS/CC）、网络端口扫描与恶意渗透；</li>
+        <li>发送未经许可的大宗垃圾邮件（SPAM）或诈骗广告；</li>
+        <li>传播木马、勒索病毒或其他恶意破坏性代码；</li>
+        <li>其他侵害第三方知识产权与严重违反法律的行为。</li>
+      </ul>
+      <p class="text-xs text-red-500">
+        一经系统安全探针或外部机房通报确认违规，我们有权在不事先通知的情况下终止相关账户服务且不予退费。
+      </p>
+
+      <h2 class="text-xl font-brand font-bold text-neutral-800 dark:text-neutral-100">3. 服务可用性与保障</h2>
+      <p>
+        灯塔加速器承诺全网骨干节点具备 99.9% 以上的高可用性保障。当因国际海缆切断、不可抗力、机房上游突发电力故障或预先公告的骨干维护导致短时波动时，运维团队将第一时间启用冗余路由进行智能容灾切换。
+      </p>
+
+      <h2 class="text-xl font-brand font-bold text-neutral-800 dark:text-neutral-100">4. 套餐与退款政策</h2>
+      <p>
+        我们提供透明的按周期及永久套餐。有关退款诉求，需在交易完成之日起 48 小时内且流量消耗未超过 5GB 时提出工单申请，经核实后予以退回。
+      </p>
+    </article>
+  </section>
+</Layout>

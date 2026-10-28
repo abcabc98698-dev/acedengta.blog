@@ -1,0 +1,128 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import PageHeader from "@/components/elements/PageHeader.astro";
+import Button from "@/components/ui/Button.astro";
+import { REGISTER_URL } from "@/config/site";
+import { CheckCircle2, AlertCircle, Clock, Activity, ShieldCheck, ArrowRight, Zap, RefreshCw } from "@lucide/astro";
+
+const clusterGroups = [
+  {
+    region: "亚太核心专线集群",
+    nodes: [
+      { name: "香港 01-10 [IEPL-A1] 骨干入口", type: "IEPL企业专线", ping: "12ms", load: "28%", status: "正常运行", uptime: "99.99%" },
+      { name: "香港 11-20 [IEPL-A2] 高可用容灾", type: "IEPL企业专线", ping: "15ms", load: "32%", status: "正常运行", uptime: "99.98%" },
+      { name: "台湾 01-05 [原生住宅] 动画疯解锁", type: "原生专线", ping: "28ms", load: "41%", status: "正常运行", uptime: "99.95%" },
+      { name: "日本东京 01-06 [IPLC-JP] 游戏/4K", type: "全球IPLC", ping: "38ms", load: "35%", status: "正常运行", uptime: "99.99%" },
+      { name: "日本大阪 07-10 [IEPL-JP] 备用通道", type: "IEPL企业专线", ping: "42ms", load: "22%", status: "正常运行", uptime: "99.97%" },
+      { name: "新加坡 01-10 [IPLC-SG] TikTok电商", type: "全球IPLC", ping: "48ms", load: "45%", status: "正常运行", uptime: "99.98%" },
+      { name: "马来西亚 01-02 [原生机房]", type: "原生专线", ping: "55ms", load: "19%", status: "正常运行", uptime: "99.92%" },
+    ]
+  },
+  {
+    region: "欧美与全球扩展集群",
+    nodes: [
+      { name: "美国硅谷 01-05 [AI-US] ChatGPT/Claude", type: "AI企业通道", ping: "125ms", load: "48%", status: "正常运行", uptime: "99.99%" },
+      { name: "美国洛杉矶 06-10 [IPLC-US] 4K流媒体", type: "全球IPLC", ping: "135ms", load: "39%", status: "正常运行", uptime: "99.97%" },
+      { name: "英国伦敦 01-03 [原生机房]", type: "原生专线", ping: "155ms", load: "24%", status: "正常运行", uptime: "99.95%" },
+      { name: "德国法兰克福 01-03 [欧洲骨干]", type: "原生专线", ping: "160ms", load: "27%", status: "正常运行", uptime: "99.96%" },
+      { name: "法国巴黎 01-02 [原生机房]", type: "原生专线", ping: "165ms", load: "20%", status: "正常运行", uptime: "99.94%" },
+      { name: "土耳其/泰国/巴西 等区域节点", type: "原生专线", ping: "175ms", load: "18%", status: "正常运行", uptime: "99.90%" },
+    ]
+  }
+];
+---
+
+<Layout
+  title="全球专线网络节点状态监控 — 灯塔加速器官方品牌官网"
+  description="灯塔加速器全网专线节点实时健康度、时延与可用性监控。亚太与欧美骨干集群全天候 7×24 小时稳定运行状态实时公开。"
+>
+  <section class="site-container my-12">
+    <PageHeader
+      title="全网专线节点实时运行状态"
+      description="实时监控全球 IEPL / IPLC 专线骨干健康度与网络时延。透明公示，保障高可用承诺。"
+    />
+  </section>
+
+  <section class="site-container max-w-5xl mx-auto pb-24 space-y-10">
+    <!-- Overall Health Banner -->
+    <div class="p-6 sm:p-8 rounded-2xl bg-emerald-500/10 border border-emerald-500/25 flex flex-col sm:flex-row items-center justify-between gap-5 text-center sm:text-left">
+      <div class="flex items-center gap-4">
+        <div class="w-12 h-12 rounded-2xl bg-emerald-500 text-white flex items-center justify-center shrink-0">
+          <CheckCircle2 size={26} />
+        </div>
+        <div>
+          <h2 class="text-lg sm:text-xl font-bold text-emerald-950 dark:text-emerald-300">
+            全网骨干专线当前运行平稳 · 99.98% 可用率
+          </h2>
+          <p class="text-xs sm:text-sm text-emerald-800/80 dark:text-emerald-400/90 mt-0.5">
+            所有 IEPL / IPLC 专线物理通道无拥堵，VLESS 协议调度中枢健康运转。
+          </p>
+        </div>
+      </div>
+      <div class="flex items-center gap-2 text-xs font-mono text-emerald-700 dark:text-emerald-400 bg-white/60 dark:bg-neutral-900/60 px-3 py-1.5 rounded-lg border border-emerald-500/20">
+        <RefreshCw size={13} class="animate-spin" />
+        <span>自动实时同步刷新</span>
+      </div>
+    </div>
+
+    <!-- Cluster Lists -->
+    {clusterGroups.map((group) => (
+      <div class="space-y-4">
+        <h3 class="text-lg font-bold text-neutral-800 dark:text-neutral-100 flex items-center gap-2">
+          <Activity size={18} class="text-primary" />
+          <span>{group.region}</span>
+        </h3>
+        <div class="overflow-x-auto rounded-2xl border border-primary/15 dark:border-neutral-700 bg-bg-secondary/70 dark:bg-bg-secondary-dark/70 shadow-sm">
+          <table class="w-full text-left border-collapse text-xs sm:text-sm">
+            <thead>
+              <tr class="border-b border-primary/15 dark:border-neutral-700 bg-primary/5 dark:bg-primary/10 text-neutral-500 dark:text-neutral-400">
+                <th class="p-3.5 font-semibold">节点名称与用途</th>
+                <th class="p-3.5 font-semibold">线路类型</th>
+                <th class="p-3.5 font-semibold">网络时延</th>
+                <th class="p-3.5 font-semibold">当前负载</th>
+                <th class="p-3.5 font-semibold">运行状态</th>
+                <th class="p-3.5 font-semibold">30天可用率</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-primary/10 dark:divide-neutral-700/60 text-neutral-600 dark:text-neutral-300">
+              {group.nodes.map((node) => (
+                <tr class="hover:bg-primary/5 transition-colors">
+                  <td class="p-3.5 font-semibold text-neutral-800 dark:text-neutral-100">{node.name}</td>
+                  <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-primary/10 text-primary dark:text-primary-light text-xs font-medium">{node.type}</span></td>
+                  <td class="p-3.5 font-mono text-emerald-600 dark:text-emerald-400 font-bold">{node.ping}</td>
+                  <td class="p-3.5">{node.load}</td>
+                  <td class="p-3.5">
+                    <span class="inline-flex items-center gap-1.5 text-xs text-emerald-600 dark:text-emerald-400 font-medium">
+                      <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                      {node.status}
+                    </span>
+                  </td>
+                  <td class="p-3.5 font-mono text-xs">{node.uptime}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    ))}
+
+    <!-- Bottom Action -->
+    <div class="p-8 rounded-2xl bg-bg-secondary dark:bg-bg-secondary-dark border border-primary/20 text-center">
+      <h3 class="text-xl font-brand font-bold text-neutral-800 dark:text-neutral-100 mb-2">
+        即刻连接高可用全球专线网络
+      </h3>
+      <p class="text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 mb-5">
+        新一代 VLESS 协议配合全 IEPL 商业专线，全套餐不限设备数，让出海业务畅行无阻。
+      </p>
+      <Button
+        url={REGISTER_URL}
+        target="_blank"
+        rel="nofollow noopener noreferrer"
+        type="fill"
+        className="px-8 py-3 text-sm font-semibold mx-auto"
+      >
+        前往官方用户中心开通 <ArrowRight size={15} />
+      </Button>
+    </div>
+  </section>
+</Layout>
