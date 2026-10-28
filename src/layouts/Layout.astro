@@ -6,21 +6,25 @@ import Header from "@/components/sections/Header.astro";
 import TrackGa from "@/components/widgets/TrackGa.astro";
 
 interface Props {
-	title?: string | undefined;
-	description?: string | undefined;
-	keywords?: string | undefined;
-	ogImage?: string | undefined;
-	ogType?: 'website' | 'article' | undefined;
-	publishDate?: Date | string | undefined;
+  title?: string | undefined;
+  description?: string | undefined;
+  keywords?: string | undefined;
+  ogImage?: string | undefined;
+  ogType?: 'website' | 'article' | undefined;
+  publishDate?: Date | string | undefined;
+  robots?: string | undefined;
+  faqs?: Array<{ question: string; answer: string }> | undefined;
 }
 
 const {
-	title,
-	description,
-	keywords,
-	ogImage,
-	ogType,
-	publishDate
+  title,
+  description,
+  keywords,
+  ogImage,
+  ogType,
+  publishDate,
+  robots,
+  faqs
 } = Astro.props;
 
 import "../styles/global.css";
@@ -39,6 +43,8 @@ import '../styles/article-enhancements.css';
       ogImage={ogImage}
       ogType={ogType}
       publishDate={publishDate}
+      robots={robots}
+      faqs={faqs}
     />
     <TrackGa />
     <!-- Dark mode initialization -->
